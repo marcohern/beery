@@ -208,8 +208,7 @@
 			<script src="templates/forty/assets/js/jquery.scrollex.min.js"></script>
 			<script src="templates/forty/assets/js/browser.min.js"></script>
 			<script src="templates/forty/assets/js/breakpoints.min.js"></script>
-			<script src="templates/forty/assets/js/util.js"></script>
-			<script src="templates/forty/assets/js/main.js"></script>
+            @vite(['resources/js/app.js'])
 
 	</body>
 </html>
