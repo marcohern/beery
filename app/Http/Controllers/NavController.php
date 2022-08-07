@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
+use App\Models\ContactRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class NavController extends Controller
 {
@@ -20,6 +23,8 @@ class NavController extends Controller
     }
 
     public function contact(Request $request) {
+        $contact = $request->all();
+        Mail::send(new Contact($contact));
         return view('forty.contact_request_sent');
     }
 }

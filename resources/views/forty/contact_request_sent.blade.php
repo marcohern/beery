@@ -13,8 +13,6 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="<?=url('/')?>">click here</a> to continue.</p>
             </div>
         </section>
-
+        
 	</div>
-
-	<x-contact/>
 </x-layout>
