@@ -2,7 +2,8 @@
 <section id="contact">
     <div class="inner">
         <section>
-            <form method="post" action="#">
+            <form method="post" action="<?=url('/contact') ?>">
+                @csrf
                 <div class="fields">
                     <div class="field half">
                         <label for="name">Name</label>
@@ -21,6 +22,7 @@
                     <li><input type="submit" value="Send Message" class="primary" /></li>
                     <li><input type="reset" value="Clear" /></li>
                 </ul>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             </form>
         </section>
         <section class="split">

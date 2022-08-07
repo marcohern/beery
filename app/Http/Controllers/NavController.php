@@ -18,4 +18,8 @@ class NavController extends Controller
     public function elements() {
         return view('forty.elements');
     }
+
+    public function contact(Request $request) {
+        return view('forty.contact_request_sent');
+    }
 }
