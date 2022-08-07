@@ -14,6 +14,7 @@ use App\Http\Controllers\NavController;
 |
 */
 Route::post('/contact', [NavController::class, 'contact']);
+Route::get('/contact_email_sent', [NavController::class, 'sent']);
 
 Route::get('/landing', [NavController::class, 'landing']);
 Route::get('/generic', [NavController::class, 'generic']);

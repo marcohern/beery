@@ -25,6 +25,10 @@ class NavController extends Controller
     public function contact(Request $request) {
         $contact = $request->all();
         Mail::send(new Contact($contact));
+        return redirect('/contact_email_sent');
+    }
+
+    public function sent() {
         return view('forty.contact_request_sent');
     }
 }
