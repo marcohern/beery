@@ -30,23 +30,25 @@
                 <div class="contact-method">
                     <span class="icon solid alt fa-envelope"></span>
                     <h3>Email</h3>
-                    <a href="#">information@untitled.tld</a>
+                    <a href="mailto:{{config('beery.emails.contact')}}">{{config('beery.emails.contact')}}</a>
                 </div>
             </section>
             <section>
                 <div class="contact-method">
                     <span class="icon solid alt fa-phone"></span>
                     <h3>Phone</h3>
-                    <span>(000) 000-0000 x12387</span>
+                    <span>{{config('beery.phone')}}</span>
                 </div>
             </section>
             <section>
                 <div class="contact-method">
                     <span class="icon solid alt fa-home"></span>
                     <h3>Address</h3>
-                    <span>1234 Somewhere Road #5432<br />
-                    Nashville, TN 00000<br />
-                    United States of America</span>
+                    <span>
+                        {{config('beery.address')}}<br />
+                        {{config('beery.city')}}, CP {{config('beery.zip')}}<br />
+                        {{config('beery.country')}}
+                    </span>
                 </div>
             </section>
         </section>
