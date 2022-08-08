@@ -332,7 +332,8 @@
 
 			});
 
-			$('#cancel-purchase').click(function (event, target) {
-				console.log("cancel-purchace", event, target);
+			$('.go-home').click(function (event, target) {
+				console.log("go-back", event, target);
+				window.location.href = "/";
 			});
 })(jQuery);

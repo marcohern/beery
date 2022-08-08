@@ -14,6 +14,4 @@
         </section>
 
 	</div>
-
-	<x-contact/>
 </x-layout>

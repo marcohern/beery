@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <ul class="actions">
-                    <li><input type="submit" value="Send Message" class="primary" /></li>
-                    <li><input type="reset" value="Clear" /></li>
+                    <li><input type="submit" value="Purchase" class="primary" /></li>
+                    <li><a class="button go-home">Cancel</a></li>
                 </ul>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             </form>
