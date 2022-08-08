@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>{{ (($title) ? "$title - " : '').'Forty by HTML5 UP' }}</title>
+		<title>{{ (($title) ? "$title - " : '').config('beery.title').'  by '.config('beery.author') }}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         @vite(['resources/css/forty/fontawesome-all.min.css','resources/css/forty/main.css','resources/css/app.css'])
