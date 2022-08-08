@@ -11,7 +11,7 @@
                 </header>
                 <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
                 <ul class="actions">
-                    <li><a href="generic.html" class="button">Learn more</a></li>
+                    <li><a href="#" class="button">Learn more</a></li>
                 </ul>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 </header>
                 <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
                 <ul class="actions">
-                    <li><a href="generic.html" class="button">Learn more</a></li>
+                    <li><a href="#" class="button">Learn more</a></li>
                 </ul>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 </header>
                 <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
                 <ul class="actions">
-                    <li><a href="generic.html" class="button">Learn more</a></li>
+                    <li><a href="#" class="button">Learn more</a></li>
                 </ul>
             </div>
         </div>
