@@ -7,7 +7,7 @@
             @endforeach
         </ul>
         <ul class="copyright">
-            <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+            <li>&copy; <?=config('beery.title')?></li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
         </ul>
     </div>
 </footer>

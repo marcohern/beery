@@ -1,4 +1,4 @@
-<!-- Contact -->
+<!-- Buy -->
 <section id="buy">
     <div class="inner">
         <section>
