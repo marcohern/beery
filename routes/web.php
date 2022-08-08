@@ -15,8 +15,10 @@ use App\Http\Controllers\NavController;
 */
 Route::post('/contact', [NavController::class, 'contact']);
 Route::get('/contact_email_sent', [NavController::class, 'sent']);
+Route::get('/purchase_request_sent', [NavController::class, 'prsent']);
 
 Route::get('/landing', [NavController::class, 'landing']);
 Route::get('/generic', [NavController::class, 'generic']);
 Route::get('/elements', [NavController::class, 'elements']);
+Route::get('/buy', [NavController::class, 'buyform']);
 Route::get('/', [NavController::class, 'home']);

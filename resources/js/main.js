@@ -332,4 +332,7 @@
 
 			});
 
+			$('#cancel-purchase').click(function (event, target) {
+				console.log("cancel-purchace", event, target);
+			});
 })(jQuery);

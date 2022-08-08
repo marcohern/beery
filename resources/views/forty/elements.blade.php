@@ -363,8 +363,8 @@
                                     <!-- Break -->
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><input type="submit" value="Send Message" class="primary" /></li>
-                                            <li><input type="reset" value="Reset" /></li>
+                                            <li><input type="submit" value="Request Purchase" class="primary" /></li>
+                                            <li><input type="button" value="Cancel" class="primary" id="cancel-purchase" /></li>
                                         </ul>
                                     </div>
                                 </div>
