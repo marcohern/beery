@@ -25,6 +25,7 @@ class Buy extends Mailable
         $this->buyRequest->flavor = $buyRequest['flavor'];
         $this->buyRequest->qty = $buyRequest['qty'];
         $this->buyRequest->name = $buyRequest['name'];
+        $this->buyRequest->phone = $buyRequest['phone'];
         $this->buyRequest->email = $buyRequest['email'];
         $this->buyRequest->comments = $buyRequest['comments'];
     }

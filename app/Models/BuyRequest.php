@@ -14,6 +14,7 @@ class BuyRequest extends Model
     public $flavor;
     public $qty;
     public $name;
+    public $phone;
     public $email;
     public $comments;
     public $_token;

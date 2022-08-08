@@ -27,11 +27,15 @@
                     </div>
                     <div class="field half">
                         <label for="name">Your Name</label>
-                        <input type="text" name="name" id="name" />
+                        <input type="text" name="name" id="name" required />
                     </div>
                     <div class="field half">
+                        <label for="phone">Your Phone</label>
+                        <input type="text" name="phone" id="phone" required />
+                    </div>
+                    <div class="field">
                         <label for="email">Your Email Address</label>
-                        <input type="text" name="email" id="email" />
+                        <input type="email" name="email" id="email" />
                     </div>
                     <div class="field">
                         <label for="comments">Comments</label>
