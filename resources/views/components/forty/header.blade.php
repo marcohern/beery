@@ -1,6 +1,6 @@
 <!-- Header -->
 <header id="header" class="alt">
-    <a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+    <a href="<?=url("/")?>" class="logo"><strong>Beery</strong> <span>by Marco</span></a>
     <nav>
         <a href="#menu">Menu</a>
     </nav>
