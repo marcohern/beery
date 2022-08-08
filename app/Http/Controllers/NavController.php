@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Mail\Buy;
 use App\Mail\Contact;
-use App\Models\ContactRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -29,14 +30,20 @@ class NavController extends Controller
     }
 
     public function sent() {
-        return view('forty.contact-request-sent');
+        return view('forty.contact_request_sent');
+    }
+
+    public function prsent() {
+        return view('forty.purchase_request_sent');
     }
 
     public function buyform() {
         return view('forty.buy');
     }
 
-    public function buy() {
-        return redirect('/thanks-for-your-interest');
+    public function buy(Request $request) {
+        $buyRequest = $request->all();
+        Mail::send(new Buy($buyRequest));
+        return redirect('/purchase-request-sent');
     }
 }

@@ -1,5 +1,5 @@
 <x-layout>
-	<x-slot:title>Contact Requested</x-slot>
+	<x-slot:title>Purchase Requested</x-slot>
 
 	<!-- Main -->
 	<div id="main">
@@ -7,7 +7,7 @@
         <section id="one">
             <div class="inner">
                 <header class="major">
-                    <h1>Contact Request Sent!</h1>
+                    <h1>Purchase Request Sent!</h1>
                 </header>
                 <span class="image main"><img src="templates/forty/images/pic11.jpg" alt="" /></span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="<?=url('/')?>">click here</a> to continue.</p>

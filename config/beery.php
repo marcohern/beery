@@ -9,7 +9,15 @@ return [
     'country' => 'Colombia',
     'emails' => [
         'contact' => 'contact@beery.com',
-        'sales' => 'sales@beery.com'
+        'sales' => 'sales@beery.com',
+        'relay' => 'relay@beery.com'
+    ],
+    'socials' => [
+        'twitter'   => ['name'=>'Twitter'  ,'fa'=>'fa-twitter'    ,'url'=>'https://www.twitter.com'  ],
+        'facebook'  => ['name'=>'Facebook' ,'fa'=>'fa-facebook-f' ,'url'=>'https://www.facebool.com' ],
+        'instagram' => ['name'=>'Instagram','fa'=>'fa-instagram'  ,'url'=>'https://www.instagram.com'],
+        'github'    => ['name'=>'Github'   ,'fa'=>'fa-github'     ,'url'=>'https://www.github.com'   ],
+        'linkedin'  => ['name'=>'LinkerIn' ,'fa'=>'fa-linkedin-in','url'=>'https://www.linkedin.com' ]
     ],
     'price' => 24000,
     'currency' => 'COP',

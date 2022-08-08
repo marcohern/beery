@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\BuyRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -20,7 +21,12 @@ class Buy extends Mailable
      */
     public function __construct($buyRequest)
     {
-        $this->buyRequest = $buyRequest;
+        $this->buyRequest = new BuyRequest();
+        $this->buyRequest->flavor = $buyRequest['flavor'];
+        $this->buyRequest->qty = $buyRequest['qty'];
+        $this->buyRequest->name = $buyRequest['name'];
+        $this->buyRequest->email = $buyRequest['email'];
+        $this->buyRequest->comments = $buyRequest['comments'];
     }
 
     /**
@@ -30,6 +36,9 @@ class Buy extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.buy');
+        return $this->to(config('beery.emails.sales'),config('beery.title'))
+            ->from(config('beery.emails.relay'))
+            ->replyTo($this->buyRequest->email)
+            ->text('mail.buy');
     }
 }

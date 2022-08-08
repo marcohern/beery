@@ -34,8 +34,9 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->to("marcohern@gmail.com","Marco Hernandez")
-            ->from($this->contact->email)
+        return $this->to(config('beery.emails.contact'),config('beery.title'))
+            ->from(config('beery.emails.relay'))
+            ->replyTo($this->contact->email)
             ->text('mail.contact');
     }
 }
