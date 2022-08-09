@@ -37,6 +37,7 @@ class Contact extends Mailable
         return $this->to(config('beery.emails.contact'),config('beery.title'))
             ->from(config('beery.emails.relay'))
             ->replyTo($this->contact->email)
-            ->text('mail.contact');
+            ->view('mail.html.contact')
+            ->text('mail.text.contact');
     }
 }
