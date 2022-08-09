@@ -34,6 +34,7 @@ class Buy extends Mailable
         return $this->to(config('beery.emails.sales'),config('beery.title'))
             ->from(config('beery.emails.relay'))
             ->replyTo($this->buyRequest->email)
+            ->subject("Buy Request")
             ->text('mail.buy');
     }
 }

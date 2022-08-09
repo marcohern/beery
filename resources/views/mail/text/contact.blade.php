@@ -1,3 +1,7 @@
-Message by {{ $contact->name }} <{{$contact->email}}>:
+{{ $contact->name }} writes:
 
 {{ $contact->message }}
+
+
+
+reply to {{ $contact->email }}
