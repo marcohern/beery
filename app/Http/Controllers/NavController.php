@@ -50,6 +50,7 @@ class NavController extends Controller
     }
 
     public function buySummary(Request $request) {
+        if (!$request->session()->has('summary')) return redirect('/buy');
         $summary = $request->session()->get('summary');
         return view('forty.buy-summary', ['summary'=> $summary]);
     }
@@ -57,6 +58,7 @@ class NavController extends Controller
     public function buy(Request $request) {
         $summary = $request->session()->get('summary');
         Mail::send(new Buy($summary));
+        $request->session()->forget('summary');
         return redirect('/purchase-request-sent');
     }
 }

@@ -7,7 +7,7 @@
         <li><a href="<?= url('/elements') ?>">Elements</a></li>
     </ul>
     <ul class="actions stacked">
-        <li><a href="#" class="button primary fit">Get Started</a></li>
-        <li><a href="#" class="button fit">Log In</a></li>
+        <li><a href="<?= url('/buy') ?>" class="button primary fit">Buy Beery</a></li>
+        <!--li><a href="#" class="button fit">Log In</a></li-->
     </ul>
 </nav>
