@@ -13,7 +13,10 @@
                         <x-buy-summary :summary="$summary"/>
                     </div>
                     <div class="col-4 col-12-md">
-                        <button class="button primary fit">Request Purchase</button>
+                        <form method="post" action="<?=url('/buy') ?>">
+                            @csrf
+                            <button class="button primary fit">Request Purchase</button>
+                        </form>
                     </div>
                 </div>
                 <span class="image main"><img src="templates/forty/images/pic11.jpg" alt="" /></span>

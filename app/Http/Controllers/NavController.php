@@ -55,8 +55,8 @@ class NavController extends Controller
     }
 
     public function buy(Request $request) {
-        $buyRequest = $request->all();
-        Mail::send(new Buy($buyRequest));
+        $summary = $request->session()->get('summary');
+        Mail::send(new Buy($summary));
         return redirect('/purchase-request-sent');
     }
 }
