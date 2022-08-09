@@ -2,15 +2,23 @@
 	<x-slot:title>Buy</x-slot>
 	<!-- Main -->
 	<div id="main">
-
         <section id="one">
             <div class="inner">
+            
                 <header class="major">
                     <h1>Buy Summary</h1>
                 </header>
-                <x-buy-summary :summary="$summary"/>
+                <div class="row">
+                    <div class="col-8 col-12-md">
+                        <x-buy-summary :summary="$summary"/>
+                    </div>
+                    <div class="col-4 col-12-md">
+                        <button class="button primary fit">Request Purchase</button>
+                    </div>
+                </div>
                 <span class="image main"><img src="templates/forty/images/pic11.jpg" alt="" /></span>
             </div>
+            
         </section>
 
 	</div>

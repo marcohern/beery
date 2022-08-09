@@ -43,7 +43,7 @@ class NavController extends Controller
 
     public function buySummarySave(Request $request) {
         $summary = (object)$request->all();
-        $summary->price = 24000;
+        $summary->price = 8000;
         $summary->total = $request->qty * $summary->price;
         $request->session()->put('summary', $summary);
         return redirect('/buy-summary');
