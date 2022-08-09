@@ -3,8 +3,9 @@
 	<tr>
 		<td class="bg_dark email-section" style="text-align:center;">
 			<div class="heading-section heading-section-white">
-				<h2>Welcome To Travel Agency</h2>
-				<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+				<h2>Purchase Request</h2>
+				<p>{{$buyRequest->name}}</p>
+				<p>{{$buyRequest->email}}</p>
 			</div>
 		</td>
 	</tr>
@@ -19,8 +20,8 @@
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 							<tr>
 								<td class="counter-text">
-									<span class="num">200</span>
-									<span class="name">Amazing Deals</span>
+									<span class="num"><?= config("beery.flavors.{$buyRequest->flavor}") ?></span>
+									<span class="name">Flavor</span>
 								</td>
 							</tr>
 						</table>
@@ -29,8 +30,8 @@
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 							<tr>
 								<td class="counter-text">
-									<span class="num">1200</span>
-									<span class="name">Sold Tours</span>
+									<span class="num"><?=$buyRequest->qty ?></span>
+									<span class="name">Beerys</span>
 								</td>
 							</tr>
 						</table>
@@ -39,8 +40,8 @@
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 							<tr>
 								<td class="counter-text">
-									<span class="num">1000</span>
-									<span class="name">Happy Traveler</span>
+									<span class="num">$<?=number_format($buyRequest->total/1000,0,",",".") ?>k</span>
+									<span class="name"><?= config("beery.currency") ?></span>
 								</td>
 							</tr>
 						</table>
