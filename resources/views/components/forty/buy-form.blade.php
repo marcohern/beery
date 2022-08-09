@@ -2,7 +2,7 @@
 <section id="buy">
     <div class="inner">
         <section>
-            <form method="post" action="<?=url('/buy') ?>">
+            <form method="post" action="<?=url('/buy-summary-save') ?>">
                 @csrf
                 <div class="fields">
                     <div class="field half">

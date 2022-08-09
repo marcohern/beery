@@ -41,6 +41,19 @@ class NavController extends Controller
         return view('forty.buy');
     }
 
+    public function buySummarySave(Request $request) {
+        $summary = (object)$request->all();
+        $summary->price = 24000;
+        $summary->total = $request->qty * $summary->price;
+        $request->session()->put('summary', $summary);
+        return redirect('/buy-summary');
+    }
+
+    public function buySummary(Request $request) {
+        $summary = $request->session()->get('summary');
+        return view('forty.buy-summary', ['summary'=> $summary]);
+    }
+
     public function buy(Request $request) {
         $buyRequest = $request->all();
         Mail::send(new Buy($buyRequest));
