@@ -17,9 +17,9 @@ class BeerySeeder extends Seeder
     public function run()
     {
         $data = [
-            ['id'=>1,'flavor_id'=>1 , 'price'=>8000 ],
-            ['id'=>2,'flavor_id'=>2 , 'price'=>8000 ],
-            ['id'=>3,'flavor_id'=>3 , 'price'=>8000 ],
+            ['id'=>1,'flavor_id'=>1, 'price'=>8000, 'stock'=>100 ],
+            ['id'=>2,'flavor_id'=>2, 'price'=>8000, 'stock'=>100 ],
+            ['id'=>3,'flavor_id'=>3, 'price'=>8000, 'stock'=>100 ],
         ];
         DateSeederHelper::setTimestamps($data);
         DB::table('beery')->insert($data);

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('flavor_id')->constrained('beery');
             $table->decimal('price', 18, 4);
+            $table->integer('stock')->default(0);
             $table->timestamps();
         });
     }
