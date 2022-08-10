@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BeeryFlavorSeeder::class,
             BeerySeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
