@@ -16,7 +16,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['id'=>1,'name'=>'Brad Pitt','email'=>'bpitt@mail.com', 'password'=>'bpitt' ]
+            ['id'=>1,'name'=>'Brad Pitt'   ,'email'=>'bpitt@mail.com'  , 'password'=>'bpitt'   ],
+            ['id'=>2,'name'=>'Tom Cruise'  ,'email'=>'tcruise@mail.com', 'password'=>'tcruise' ],
+            ['id'=>3,'name'=>'Frank Castle','email'=>'fcastle@mail.com', 'password'=>'fcastle' ]
         ];
         DateSeederHelper::setTimestamps($data);
         PasswordSeederHelper::hashPassword($data);
