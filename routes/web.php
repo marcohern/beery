@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NavController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BuyController;
+use App\Http\Controllers\NavController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::get('/contact-email-sent', [NavController::class, 'sent']);
 Route::get('/landing', [NavController::class, 'landing']);
 Route::get('/generic', [NavController::class, 'generic']);
 Route::get('/elements', [NavController::class, 'elements']);
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'loginform']);
 
 Route::post('/buy', [BuyController::class, 'buy']);
 Route::post('/buy-summary-save', [BuyController::class, 'buySummarySave']);

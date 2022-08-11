@@ -8,6 +8,6 @@
     </ul>
     <ul class="actions stacked">
         <li><a href="<?= url('/buy') ?>" class="button primary fit">Buy Beery</a></li>
-        <!--li><a href="#" class="button fit">Log In</a></li-->
+        <li><a href="<?= url('/login') ?>" class="button fit">Log In</a></li>
     </ul>
 </nav>
