@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\Helpers\DateSeederHelper;
+use Database\Seeders\Helpers\OrderHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,12 +32,6 @@ class OrderDetailsSeeder extends Seeder
         ];
         DateSeederHelper::setTimestamps($data);
         DB::table('beery_order_details')->insert($data);
-        
-        $orders = DB::table('beery_order_details')
-            ->selectRaw('SUM(unit_price * qty) AS price, order_id')
-            ->groupBy('order_id')->get();
-        foreach($orders as $order) {
-            DB::table('beery_orders')->where('id', $order->order_id)->update(['total_price'=> $order->price]);
-        }
+        OrderHelper::updateTotalsFromDetails();
     }
 }
