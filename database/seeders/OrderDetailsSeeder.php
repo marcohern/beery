@@ -20,6 +20,14 @@ class OrderDetailsSeeder extends Seeder
             ['id'=>1,'flavor_id'=>1, 'order_id'=>1, 'qty'=>1, 'unit_price'=>8000],
             ['id'=>2,'flavor_id'=>2, 'order_id'=>1, 'qty'=>2, 'unit_price'=>8000],
             ['id'=>3,'flavor_id'=>3, 'order_id'=>1, 'qty'=>3, 'unit_price'=>8000],
+
+            ['id'=>4,'flavor_id'=>1, 'order_id'=>2, 'qty'=>2, 'unit_price'=>8000],
+            ['id'=>5,'flavor_id'=>2, 'order_id'=>2, 'qty'=>2, 'unit_price'=>8000],
+            ['id'=>6,'flavor_id'=>3, 'order_id'=>2, 'qty'=>2, 'unit_price'=>8000],
+
+            ['id'=>7,'flavor_id'=>1, 'order_id'=>3, 'qty'=> 5, 'unit_price'=>8000],
+            ['id'=>8,'flavor_id'=>2, 'order_id'=>3, 'qty'=>10, 'unit_price'=>8000],
+            ['id'=>9,'flavor_id'=>3, 'order_id'=>3, 'qty'=>15, 'unit_price'=>8000],
         ];
         DateSeederHelper::setTimestamps($data);
         DB::table('beery_order_details')->insert($data);
