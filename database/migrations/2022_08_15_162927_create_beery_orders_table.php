@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('beery_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->dateTime('order_date')->nullable(true);
-            $table->decimal('total_price', 18, 4);
+            $table->boolean('invoice')->default(false);
+            $table->dateTime('effective_date')->nullable(true);
+            $table->decimal('total_price', 18, 4)->default(0.0);
             $table->timestamps();
         });
     }
