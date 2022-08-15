@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('beery', function (Blueprint $table) {
+        Schema::create('beery_order_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained('beery_orders');
             $table->foreignId('flavor_id')->constrained('beery_flavors');
-            $table->decimal('price', 18, 4);
-            $table->integer('stock')->default(0);
+            $table->integer('qty');
+            $table->decimal('unit_price', 18, 4);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beery');
+        Schema::dropIfExists('beery_order_details');
     }
 };

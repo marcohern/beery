@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             BeeryFlavorSeeder::class,
             BeerySeeder::class,
             UserSeeder::class,
+            OrdersSeeder::class,
+            OrderDetailsSeeder::class,
         ]);
     }
 }
