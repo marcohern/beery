@@ -8,7 +8,7 @@
                 <header class="major">
                     <h1>Buy Beery</h1>
                 </header>
-                <x-buy-form/>
+                <x-buy-form :flavors="$flavors"/>
                 <span class="image main"><img src="templates/forty/images/pic11.jpg" alt="" /></span>
             </div>
         </section>

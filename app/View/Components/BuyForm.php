@@ -6,21 +6,13 @@ use Illuminate\View\Component;
 
 class BuyForm extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $flavors;
+    
+    public function __construct($flavors)
     {
-        //
+        $this->flavors = $flavors;
     }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+    
     public function render()
     {
         return view('components.forty.buy-form');

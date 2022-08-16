@@ -12,3 +12,9 @@
 .login .row {
     padding: 1em 0 0 0;
 }
+
+input.qty {
+    color:black;
+    width:5em;
+    font-weight: bold;
+}

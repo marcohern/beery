@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Flavor;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class BuyController extends Controller
@@ -12,11 +15,13 @@ class BuyController extends Controller
     }
 
     public function buyform() {
-        return view('forty.buy');
+        $flavors = Flavor::all();
+        return view('forty.buy', ['flavors'=>$flavors]);
     }
 
     public function buySummarySave(Request $request) {
         $summary = (object)$request->all();
+        dd($summary);
         $summary->price = 8000;
         $summary->total = $request->qty * $summary->price;
         $request->session()->put('summary', $summary);

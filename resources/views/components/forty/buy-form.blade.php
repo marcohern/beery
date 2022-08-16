@@ -4,27 +4,49 @@
         <section>
             <form method="post" action="<?=url('/buy-summary-save') ?>">
                 @csrf
+                <input type="hidden" id="universal_price" value="8000"/>
+                <h2>Flavors</h2>
+                <div class="row">
+                    <div id="flavor_selector" class="col-6 col-12-medium">
+                        @foreach ($flavors as $f)
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="{{$f->code}}[qty]">{{$f->name}}</label>
+                                </div>
+                                <div class="col-6">
+                                    <select name="{{$f->code}}[qty]" id="qty" class="qty fit">
+                                        <option value="0">None</option>
+                                        <option value="6">1 Sixpack</option>
+                                        <option value="12">2 Sixpacks</option>
+                                        <option value="18">3 Sixpacks</option>
+                                        <option value="20">1 Crate</option>
+                                        <option value="40">2 Crates</option>
+                                        <option value="80">3 Crates</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <span class="subtotal">$0</span>
+                                    <input type="hidden" class="subtotal" name="{{$f->code}}[subtotal]"/>
+                                </div>
+                            </div>
+                            <br/>
+                        @endforeach
+                        
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Total</label>
+                            </div>
+                            <div class="col-6">
+                            </div>
+                            <div class="col-3">
+                                <span class="total"><b>$0</b></span>
+                                <input type="hidden" name="total" class="total"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="fields">
-                    <div class="field half">
-                        <label for="flavor">What flavor?</label>
-                        <select name="flavor" id="flavor">
-                            <option value="surprise-me">Surprise Me</option>
-                            @foreach(config('beery.flavors') as $flavor_code =>$flavor_name)
-                            <option value="{{$flavor_code}}">{{$flavor_name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="field half">
-                        <label for="qty">How many?</label>
-                        <select name="qty" id="qty">
-                            <option value="6">1 Sixpack</option>
-                            <option value="12">2 Sixpacks</option>
-                            <option value="18">3 Sixpacks</option>
-                            <option value="20">1 Crate</option>
-                            <option value="40">2 Crates</option>
-                            <option value="99999">More than 2 Crates</option>
-                        </select>
-                    </div>
                     <div class="field half">
                         <label for="name">Your Name</label>
                         <input type="text" name="name" id="name" required />
