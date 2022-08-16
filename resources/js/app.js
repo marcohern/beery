@@ -21,20 +21,16 @@ function setUniversalBeerPriceForBuyForm() {
 function setUniversalBeerPrice(row, uprice) {
     var qty = parseInt($(row).find('select').val(), 10);
     var name = $(row).find('label').html();
-    console.log(name, qty, uprice);
     $(row).find('span.subtotal').text("$ " + qty*uprice);
     $(row).find('input.subtotal').val(qty*uprice);
 }
 
 function sumOrderTotal() {
     var total = 0;
-    console.log("sumOrderTotal");
     $('#flavor_selector input.subtotal').each( (i, element) => {
-        console.log("sumOrderTotal",i, element);
         var subtotal = $(element).val();
         total += parseInt(subtotal,10);
     });
-    console.log("sumOrderTotal", total);
     $('#flavor_selector span.total b').text("$ " + total);
     $('#flavor_selector input.total').val(total);
 }
