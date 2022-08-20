@@ -21,9 +21,9 @@ class BuyController extends Controller
 
     public function buySummarySave(Request $request) {
         $summary = (object)$request->all();
-        dd($summary);
         $summary->price = 8000;
         $summary->total = $request->qty * $summary->price;
+        dd($summary);
         $request->session()->put('summary', $summary);
         return redirect('/buy-summary');
     }

@@ -8,13 +8,13 @@
                 <h2>Flavors</h2>
                 <div class="row">
                     <div id="flavor_selector" class="col-6 col-12-medium">
-                        @foreach ($flavors as $f)
+                        @foreach ($flavors as $k => $f)
                             <div class="row">
                                 <div class="col-3">
-                                    <label for="{{$f->code}}[qty]">{{$f->name}}</label>
+                                    <label for="details[{{$f->code}}][qty]">{{$f->name}}</label>
                                 </div>
                                 <div class="col-6">
-                                    <select name="{{$f->code}}[qty]" id="qty" class="qty fit">
+                                    <select name="details[{{$f->code}}][qty]" id="qty" class="qty fit">
                                         <option value="0">None</option>
                                         <option value="6">1 Sixpack</option>
                                         <option value="12">2 Sixpacks</option>
@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="col-3">
                                     <span class="subtotal">$0</span>
-                                    <input type="hidden" class="subtotal" name="{{$f->code}}[subtotal]"/>
+                                    <input type="hidden" class="subtotal" name="details[{{$f->code}}][subtotal]"/>
                                 </div>
                             </div>
                             <br/>
