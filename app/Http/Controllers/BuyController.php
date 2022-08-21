@@ -23,7 +23,8 @@ class BuyController extends Controller
         $summary = (object)$request->all();
         $summary->price = 8000;
         $summary->total = $request->qty * $summary->price;
-        dd($summary);
+        $order = $this->toOrder($summary);
+        dd($order);
         $request->session()->put('summary', $summary);
         return redirect('/buy-summary');
     }
@@ -39,5 +40,30 @@ class BuyController extends Controller
         Mail::send(new Buy($summary));
         $request->session()->forget('summary');
         return redirect('/purchase-request-sent');
+    }
+
+    private function toOrder($input): Order
+    {
+        $order = new Order();
+        $order->user_id = 1;
+        $order->invoice = true;
+        $order->effective_date = null;
+        $order->total_price = $input->total;
+        $details = [];
+        foreach ($input->details as $type => $detail) {
+            $details[] = $this->toOrderDetail($type, $detail);
+        }
+        $order->details = $details;
+        return $order;
+    }
+
+    private function toOrderDetail($type, $detail): OrderDetail
+    {
+        $orderDetails = new OrderDetail();
+        $orderDetails->order_id = null;
+        $orderDetails->flavor_id = 1;
+        $orderDetails->qty = $detail['qty'];
+        $orderDetails->unit_price = $detail['subtotal']/$detail['qty'];
+        return $orderDetails;
     }
 }
