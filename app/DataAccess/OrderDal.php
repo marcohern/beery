@@ -26,4 +26,13 @@ class OrderDal
         $details->unit_price = $detail['subtotal']/$detail['qty'];
         return $details;
     }
+
+    public function sumTotal(array $details)
+    {
+        $sum = 0;
+        foreach ($details as $detail) {
+            $sum += $detail->qty * $detail->unit_price;
+        }
+        return $sum;
+    }
 }
