@@ -38,7 +38,7 @@ class Contact extends Mailable
             ->from(config('beery.emails.relay'))
             ->replyTo($this->contact->email)
             ->subject("Contact Request")
-            ->view('mail.html.contact')
-            ->text('mail.text.contact');
+            ->view('forty.mail.html.contact')
+            ->text('forty.mail.text.contact');
     }
 }
