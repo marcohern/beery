@@ -24,6 +24,6 @@ class BuySummary extends Component
      */
     public function render()
     {
-        return view('components.forty.buy-summary');
+        return view('forty.components.buy-summary');
     }
 }

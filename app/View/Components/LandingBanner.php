@@ -23,6 +23,6 @@ class LandingBanner extends Component
      */
     public function render()
     {
-        return view('components.forty.landing-banner');
+        return view('forty.components.landing-banner');
     }
 }

@@ -23,6 +23,6 @@ class Contact extends Component
      */
     public function render()
     {
-        return view('components.forty.contact');
+        return view('forty.components.contact');
     }
 }

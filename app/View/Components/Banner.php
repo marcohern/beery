@@ -23,6 +23,6 @@ class Banner extends Component
      */
     public function render()
     {
-        return view('components.forty.banner');
+        return view('forty.components.banner');
     }
 }

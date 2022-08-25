@@ -23,6 +23,6 @@ class LandingOne extends Component
      */
     public function render()
     {
-        return view('components.forty.landing-one');
+        return view('forty.components.landing-one');
     }
 }

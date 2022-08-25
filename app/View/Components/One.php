@@ -23,6 +23,6 @@ class One extends Component
      */
     public function render()
     {
-        return view('components.forty.one');
+        return view('forty.components.one');
     }
 }

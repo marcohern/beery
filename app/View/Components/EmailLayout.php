@@ -23,6 +23,6 @@ class EmailLayout extends Component
      */
     public function render()
     {
-        return view('components.forty.email-layout');
+        return view('forty.components.email-layout');
     }
 }

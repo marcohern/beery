@@ -15,6 +15,6 @@ class BuyForm extends Component
     
     public function render()
     {
-        return view('components.forty.buy-form');
+        return view('forty.components.buy-form');
     }
 }

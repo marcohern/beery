@@ -23,6 +23,6 @@ class Layout extends Component
      */
     public function render()
     {
-        return view('components.forty.layout');
+        return view('forty.components.layout');
     }
 }

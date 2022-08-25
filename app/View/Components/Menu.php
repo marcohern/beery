@@ -23,6 +23,6 @@ class Menu extends Component
      */
     public function render()
     {
-        return view('components.forty.menu');
+        return view('forty.components.menu');
     }
 }

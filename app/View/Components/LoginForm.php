@@ -23,6 +23,6 @@ class LoginForm extends Component
      */
     public function render()
     {
-        return view('components.forty.login-form');
+        return view('forty.components.login-form');
     }
 }

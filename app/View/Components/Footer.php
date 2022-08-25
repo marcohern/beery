@@ -23,6 +23,6 @@ class Footer extends Component
      */
     public function render()
     {
-        return view('components.forty.footer');
+        return view('forty.components.footer');
     }
 }

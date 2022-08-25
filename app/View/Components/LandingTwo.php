@@ -23,6 +23,6 @@ class LandingTwo extends Component
      */
     public function render()
     {
-        return view('components.forty.landing-two');
+        return view('forty.components.landing-two');
     }
 }
