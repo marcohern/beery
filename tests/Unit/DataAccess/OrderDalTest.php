@@ -15,7 +15,10 @@ class OrderDalTests extends TestCase
             'rusty' => ['qty'=>2, 'subtotal'=>16000],
             'dark'  => ['qty'=>3, 'subtotal'=>24000],
         ];
-        $input->total = 48000;
+        $input->total
+            = $input->details['pale' ]['subtotal']
+            + $input->details['rusty']['subtotal']
+            + $input->details['dark' ]['subtotal'];
         $input->name = 'Bradd Pitt';
         $input->phone = '555 555 5555';
         $input->email = 'bpitt@mail.com';
@@ -33,29 +36,13 @@ class OrderDalTests extends TestCase
         $input = $this->buildOrderFormData();
 
         $dal = new OrderDal();
-        $order = $dal->fromForm($input);
+        $user = new User(); $user->id = 1;
+        $order = $dal->fromForm($input, $user);
 
         $this->assertEquals($order->total, $order->total);
         $this->assertEquals($order->user_id, 1);
         $this->assertEquals($order->invoice, false);
         $this->assertNull($order->effective_date);
         $this->assertEquals($order->total_price, 48000);
-    }
-
-    public function test_detailsFromForm()
-    {
-        $input = $this->buildOrderFormData();
-
-        $dal = new OrderDal();
-        $pale  = $dal->detailsFromForm('pale' , $input->details['pale' ]);
-        $rusty = $dal->detailsFromForm('rusty', $input->details['rusty']);
-        $dark  = $dal->detailsFromForm('dark' , $input->details['dark' ]);
-
-        $this->assertEquals($pale->qty , 1);
-        $this->assertEquals($pale->unit_price , 8000);
-        $this->assertEquals($rusty->qty, 2);
-        $this->assertEquals($rusty->unit_price, 8000);
-        $this->assertEquals($dark->qty , 3);
-        $this->assertEquals($dark->unit_price , 8000);
     }
 }
