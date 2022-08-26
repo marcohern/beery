@@ -11,12 +11,12 @@ class BuyController extends Controller
 {
 
     public function prsent() {
-        return view('forty.purchase_request_sent');
+        return view('forty.pages.purchase_request_sent');
     }
 
     public function buyform() {
         $flavors = Flavor::all();
-        return view('forty.buy', ['flavors'=>$flavors]);
+        return view('forty.pages.buy', ['flavors'=>$flavors]);
     }
 
     public function buySummarySave(Request $request) {
@@ -32,7 +32,7 @@ class BuyController extends Controller
     public function buySummary(Request $request) {
         if (!$request->session()->has('summary')) return redirect('/buy');
         $summary = $request->session()->get('summary');
-        return view('forty.buy-summary', ['summary'=> $summary]);
+        return view('forty.pages.buy-summary', ['summary'=> $summary]);
     }
 
     public function buy(Request $request) {

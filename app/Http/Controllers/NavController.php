@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Mail;
 class NavController extends Controller
 {
     public function home() {
-        return view('forty.home');
+        return view('forty.pages.home');
     }
     public function landing() {
-        return view('forty.landing');
+        return view('forty.pages.landing');
     }
     public function generic() {
-        return view('forty.generic');
+        return view('forty.pages.generic');
     }
     public function elements() {
-        return view('forty.elements');
+        return view('forty.pages.elements');
     }
 
     public function contact(Request $request) {
@@ -30,6 +30,6 @@ class NavController extends Controller
     }
 
     public function sent() {
-        return view('forty.contact_request_sent');
+        return view('forty.pages.contact_request_sent');
     }
 }
