@@ -47,4 +47,16 @@ class OrderExDalTests extends TestCase
         $this->assertEquals($order->email, 'bpitt@mail.com');
         $this->assertEquals($order->comments, 'Lorem Ipsum dolor sit amet.');
     }
+
+    public function test_makeEffective() {
+        $input = $this->buildOrderFormData();
+
+        $dal = new OrderExDal();
+        $order = $dal->fromForm($input);
+        
+        $dal->makeEffective($order);
+
+        $this->assertEquals($order->invoice, true);
+        $this->assertNotNull($order->effective_date);
+    }
 }
