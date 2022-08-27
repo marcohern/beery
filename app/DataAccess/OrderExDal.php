@@ -26,4 +26,13 @@ class OrderExDal
         $order->effective_date = new \DateTime();
         $order->invoice = true;
     }
+
+    public function saveAll(OrderEx $order, array $details)
+    {
+        $order->save();
+        foreach($details as $detail) {
+            $detail->order_id = $order->id;
+            $detail->save();
+        }
+    }
 }

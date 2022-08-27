@@ -77,25 +77,27 @@ class BuyController extends Controller
     }
 
     public function buy(Request $request) {
+        //Get order and details stored in session
         $session = $request->session();
         $order = $session->get('order');
         $details = $session->get('details');
         $flavors = $session->get('flavors');
 
+        //set it to become an invoice (freeze it)
+        $this->orderExDal->makeEffective($order);
+
+        //save it all to the database
         DB::transaction(function() use ($order, $details) {
-            $order->invoice = true;
-            $order->effective_date = new \DateTime();
-            $order->save();
-            foreach($details as $detail) {
-                $detail->order_id = $order->id;
-                $detail->save();
-            }
+            $this->orderExDal->saveAll($order, $details);
         });
 
+        //Send an email
         Mail::send(new Buy($order, $details, $flavors));
         
+        //Delete the session
         $session->forget(['order','details','flavors']);
 
+        //Rederect to a confirm purchase
         return redirect('/purchase-request-sent');
     }
 }
