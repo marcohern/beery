@@ -21,7 +21,7 @@
         <tfoot>
             <tr>
                 <td colspan="3"><b>Total</b></td>
-                <td><b>{{$order->total}}</b></td>
+                <td><b>{{$order->total_price}}</b></td>
             </tr>
         </tfoot>
     </table>
