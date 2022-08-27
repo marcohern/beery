@@ -18,9 +18,9 @@ return new class extends Migration
             $table->boolean('invoice')->default(false);
             $table->dateTime('effective_date')->nullable(true);
             $table->decimal('total_price', 18, 4)->default(0.0);
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('name', 64);
+            $table->string('phone', 32);
+            $table->string('email',255);
             $table->string('comments')->nullable();
             $table->timestamps();
         });
