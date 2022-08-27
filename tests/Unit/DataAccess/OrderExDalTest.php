@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\DataAccess;
 
-use App\DataAccess\OrderDal;
+use App\DataAccess\OrderExDal;
 use PHPUnit\Framework\TestCase;
 
-class OrderDalTests extends TestCase
+class OrderExDalTests extends TestCase
 {
     private function buildOrderFormData()
     {
@@ -35,14 +35,16 @@ class OrderDalTests extends TestCase
     {
         $input = $this->buildOrderFormData();
 
-        $dal = new OrderDal();
-        $user = new User(); $user->id = 1;
-        $order = $dal->fromForm($input, $user);
+        $dal = new OrderExDal();
+        $order = $dal->fromForm($input);
 
         $this->assertEquals($order->total, $order->total);
-        $this->assertEquals($order->user_id, 1);
         $this->assertEquals($order->invoice, false);
         $this->assertNull($order->effective_date);
         $this->assertEquals($order->total_price, 48000);
+        $this->assertEquals($order->name, 'Bradd Pitt');
+        $this->assertEquals($order->phone, '555 555 5555');
+        $this->assertEquals($order->email, 'bpitt@mail.com');
+        $this->assertEquals($order->comments, 'Lorem Ipsum dolor sit amet.');
     }
 }
