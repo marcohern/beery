@@ -23,6 +23,14 @@ class OrderExDalTests extends TestCase
         $input->phone = '555 555 5555';
         $input->email = 'bpitt@mail.com';
         $input->comments = 'Lorem Ipsum dolor sit amet.';
+
+        $input->suite = 'Apt 123';
+        $input->address = 'Cra 12 #34-56';
+        $input->zone = 'Los Santos';
+        $input->zip = '050078';
+        $input->city = 'Medellin';
+        $input->country = 'Colombia';
+
         return $input;
     }
 
@@ -46,9 +54,16 @@ class OrderExDalTests extends TestCase
         $this->assertEquals($order->phone, '555 555 5555');
         $this->assertEquals($order->email, 'bpitt@mail.com');
         $this->assertEquals($order->comments, 'Lorem Ipsum dolor sit amet.');
+        $this->assertEquals($order->suite, 'Apt 123');
+        $this->assertEquals($order->address, 'Cra 12 #34-56');
+        $this->assertEquals($order->zone, 'Los Santos');
+        $this->assertEquals($order->zip, '050078');
+        $this->assertEquals($order->city, 'Medellin');
+        $this->assertEquals($order->country, 'Colombia');
     }
 
-    public function test_makeEffective() {
+    public function test_makeEffective()
+    {
         $input = $this->buildOrderFormData();
 
         $dal = new OrderExDal();
