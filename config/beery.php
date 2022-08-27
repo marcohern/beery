@@ -19,7 +19,7 @@ return [
         'github'    => ['name'=>'Github'   ,'fa'=>'fa-github'     ,'url'=>'https://www.github.com'   ],
         'linkedin'  => ['name'=>'LinkerIn' ,'fa'=>'fa-linkedin-in','url'=>'https://www.linkedin.com' ]
     ],
-    'price' => 24000,
+    'universal_price' => 8000,
     'currency' => 'COP',
     'flavors' => [
         'pale' => 'Pale',

@@ -2,40 +2,52 @@ import './bootstrap';
 
 import './util';
 import './main';
+import { defaultsDeep } from 'lodash';
 
 function setUniversalBeerPriceForBuyForm() {
-    var uprice = parseInt($("#universal_price").val(), 10);
-    if (isNaN(uprice)) return;
     $('#flavor_selector select').change(e => {
-        setUniversalBeerPrice($(e.target).parent().parent(), uprice);
+        var compound = $(e.target).val().split(':');
+        var price = compound[1];
+        setUniversalBeerPrice($(e.target).parent().parent(), price);
         sumOrderTotal();
 
         
     });
     $('#flavor_selector .row').each((i, row) => {
-        setUniversalBeerPrice(row, uprice);
+        var compoundstr = $(row).find('select').val();
+        if (compoundstr == undefined) return;
+        var compound = $(row).find('select').val().split(':');
+        var price = compound[1];
+        setUniversalBeerPrice(row, price);
     });
     
     sumOrderTotal();
 }
 
-function setUniversalBeerPrice(row, uprice) {
-    var qty = parseInt($(row).find('select').val(), 10);
+function setUniversalBeerPrice(row, price) {
     var name = $(row).find('label').html();
-    $(row).find('span.subtotal').text("$ " + qty*uprice);
-    $(row).find('input.subtotal').val(qty*uprice);
+    $(row).find('span.subtotal').text("$ " + price);
 }
 
 function sumOrderTotal() {
+    console.log("sumOrderTotal");
     var total = 0;
-    $('#flavor_selector input.subtotal').each( (i, element) => {
-        var subtotal = $(element).val();
-        total += parseInt(subtotal,10);
+    $('#flavor_selector select').each( (i, element) => {
+        var compound = $(element).val().split(':');
+        var qty = parseInt(compound[0], 10);
+        var subtotal = parseInt(compound[1], 10);
+        setUniversalBeerPrice($(element).parent().parent(), subtotal);
+        total += subtotal;
     });
     $('#flavor_selector span.total b').text("$ " + total);
-    $('#flavor_selector input.total').val(total);
 }
 
 $(document).ready(function() {
-    setUniversalBeerPriceForBuyForm();
+
+    if ($('#flavor_selector').length) {
+        setUniversalBeerPriceForBuyForm();
+        setTimeout(function() {
+            sumOrderTotal();
+        }, 500);
+    };
 });

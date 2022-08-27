@@ -16,12 +16,14 @@ class BuyController extends Controller
         return view('forty.pages.purchase_request_sent');
     }
 
-    public function buyform() {
+    public function buyform()
+    {
         $flavors = Flavor::all();
         return view('forty.pages.buy', [ 'flavors'=>$flavors ]);
     }
 
-    public function buySummarySave(Request $request) {
+    public function buySummarySave(Request $request)
+    {
         $summary = (object)$request->all();
         $order = $this->toOrder($summary);
         $flavorModels = Flavor::all();
@@ -41,30 +43,31 @@ class BuyController extends Controller
             $sum += $detail->subtotal;
         }
         $order->total_price = $sum;
-        $request->session()->put('order', $order);
-        $request->session()->put('details', $details);
-        $request->session()->put('flavors', $flavors);
+        $session = $request->session();
+        $session->put('order', $order);
+        $session->put('details', $details);
+        $session->put('flavors', $flavors);
         return redirect('/buy-summary');
     }
 
     public function buySummary(Request $request) {
-        if (!$request->session()->has('order')) return redirect('/buy');
-        $order = $request->session()->get('order');
-        $details = $request->session()->get('details');
-        $flavors = $request->session()->get('flavors');
+        $session = $request->session();
+        if (!$session->has('order')) return redirect('/buy');
+        $order = $session->get('order');
+        $details = $session->get('details');
+        $flavors = $session->get('flavors');
         return view('forty.pages.buy-summary', [ 'order'=>$order, 'details'=>$details, 'flavors'=>$flavors ]);
     }
 
     public function buy(Request $request) {
-        $order = $request->session()->get('order');
-        $details = $request->session()->get('details');
-        $flavors = $request->session()->get('flavors');
+        $session = $request->session();
+        $order = $session->get('order');
+        $details = $session->get('details');
+        $flavors = $session->get('flavors');
 
         Mail::send(new Buy($order, $details, $flavors));
         
-        $request->session()->forget('order');
-        $request->session()->forget('details');
-        $request->session()->forget('flavors');
+        $session->forget(['order','details','flavors']);
 
         return redirect('/purchase-request-sent');
     }
