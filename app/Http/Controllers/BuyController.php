@@ -67,11 +67,11 @@ class BuyController extends Controller
         $flavors = $session->get('flavors');
 
         DB::transaction(function() use ($order, $details) {
+            $order->invoice = true;
+            $order->effective_date = new \DateTime();
             $order->save();
             foreach($details as $detail) {
                 $detail->order_id = $order->id;
-                $detail->invoice = true;
-                $detail->effective_date = new \DateTime();
                 $detail->save();
             }
         });
@@ -86,7 +86,7 @@ class BuyController extends Controller
     private function toOrder($input): OrderEx
     {
         $order = new OrderEx();
-        $order->invoice = true;
+        $order->invoice = false;
         $order->effective_date = null;
         $order->total_price = $input->total;
         
