@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\Buy;
 use App\Models\Flavor;
-use App\Models\OrderEx;
-use App\Models\OrderDetailEx;
 use App\DataAccess\OrderExDal;
 use App\DataAccess\OrderDetailExDal;
 use Illuminate\Http\Request;
