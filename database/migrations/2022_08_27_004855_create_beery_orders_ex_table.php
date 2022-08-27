@@ -21,6 +21,12 @@ return new class extends Migration
             $table->string('name', 64);
             $table->string('phone', 32);
             $table->string('email',255);
+            $table->string('suite',128);
+            $table->string('address',255);
+            $table->string('neighborhood',255);
+            $table->string('zip',32);
+            $table->string('city',64);
+            $table->string('country',64);
             $table->string('comments')->nullable();
             $table->timestamps();
         });
