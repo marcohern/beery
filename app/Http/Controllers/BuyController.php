@@ -7,6 +7,7 @@ use App\Models\Flavor;
 use App\Models\OrderEx;
 use App\Models\OrderDetailEx;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class BuyController extends Controller
@@ -64,6 +65,16 @@ class BuyController extends Controller
         $order = $session->get('order');
         $details = $session->get('details');
         $flavors = $session->get('flavors');
+
+        DB::transaction(function() use ($order, $details) {
+            $order->save();
+            foreach($details as $detail) {
+                $detail->order_id = $order->id;
+                $detail->invoice = true;
+                $detail->effective_date = new \DateTime();
+                $detail->save();
+            }
+        });
 
         Mail::send(new Buy($order, $details, $flavors));
         
