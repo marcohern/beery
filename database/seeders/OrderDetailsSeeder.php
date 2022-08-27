@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\Helpers\DateSeederHelper;
 use Database\Seeders\Helpers\OrderHelper;
+use Database\Seeders\Helpers\OrderDetailHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,6 +32,7 @@ class OrderDetailsSeeder extends Seeder
             ['id'=>9,'flavor_id'=>3, 'order_id'=>3, 'qty'=>15, 'unit_price'=>8000],
         ];
         DateSeederHelper::setTimestamps($data);
+        OrderDetailHelper::calculateSubtotals($data);
         DB::table('beery_order_details')->insert($data);
         OrderHelper::updateTotalsFromDetails();
     }

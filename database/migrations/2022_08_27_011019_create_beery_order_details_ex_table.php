@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('beery_order_details', function (Blueprint $table) {
+        Schema::create('beery_order_details_ex', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('beery_orders');
+            $table->foreignId('order_id')->constrained('beery_orders_ex');
             $table->foreignId('flavor_id')->constrained('beery_flavors');
             $table->integer('qty');
             $table->decimal('unit_price', 18, 4);
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beery_order_details');
+        Schema::dropIfExists('beery_order_details_ex');
     }
 };
