@@ -1,0 +1,74 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "PayU",
+    "dateExported": "2022-08-27T23:35:42.415Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "839951a0-10b4-440a-b65b-6e767ab1a5db",
+            "name": "Colombia",
+            "containerId": "",
+            "created": "2022-08-27T23:12:40.445Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "766d6b47-9e23-4f4f-b615-1bb3b20bcde5",
+            "colId": "4f118ed8-2ebf-44ec-b585-c93660062dc9",
+            "containerId": "839951a0-10b4-440a-b65b-6e767ab1a5db",
+            "name": "Lista de Bancos",
+            "url": "https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2022-08-27T23:12:52.835Z",
+            "modified": "2022-08-27T23:15:44.995Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n   \"language\": \"es\",\r\n   \"command\": \"GET_BANKS_LIST\",\r\n   \"merchant\": {\r\n      \"apiLogin\": \"pRRXKOl8ikMmt9u\",\r\n      \"apiKey\": \"4Vj8eK4rloUd272L48hsrarnUA\"\r\n   },\r\n   \"test\": false,\r\n   \"bankListInformation\": {\r\n      \"paymentMethod\": \"PSE\",\r\n      \"paymentCountry\": \"CO\"\r\n   }\r\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "164ad73d-0707-4868-bf62-5549121189b8",
+            "colId": "4f118ed8-2ebf-44ec-b585-c93660062dc9",
+            "containerId": "839951a0-10b4-440a-b65b-6e767ab1a5db",
+            "name": "Metodos de Pago",
+            "url": "https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2022-08-27T23:27:05.978Z",
+            "modified": "2022-08-27T23:27:31.463Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n   \"test\": false,\r\n   \"language\": \"es\",\r\n   \"command\": \"GET_PAYMENT_METHODS\",\r\n   \"merchant\": {\r\n      \"apiLogin\": \"pRRXKOl8ikMmt9u\",\r\n      \"apiKey\": \"4Vj8eK4rloUd272L48hsrarnUA\"\r\n   }\r\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "da338edc-73b6-4d88-9649-2df9b1a80bff",
+            "colId": "4f118ed8-2ebf-44ec-b585-c93660062dc9",
+            "containerId": "839951a0-10b4-440a-b65b-6e767ab1a5db",
+            "name": "Pago de Prueba",
+            "url": "https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2022-08-27T23:16:42.740Z",
+            "modified": "2022-08-27T23:33:54.910Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n   \"language\": \"es\",\r\n   \"command\": \"SUBMIT_TRANSACTION\",\r\n   \"merchant\": {\r\n      \"apiLogin\": \"pRRXKOl8ikMmt9u\",\r\n      \"apiKey\": \"4Vj8eK4rloUd272L48hsrarnUA\"\r\n   },\r\n   \"transaction\": {\r\n      \"order\": {\r\n         \"accountId\": \"512321\",\r\n         \"referenceCode\": \"BEERY_TEST_0000001_409299895\",\r\n         \"description\": \"Payment test description\",\r\n         \"language\": \"es\",\r\n         \"signature\": \"f349cbc15807caa82389e329f52e052f\",\r\n         \"notifyUrl\": \"http://www.payu.com/notify\",\r\n         \"additionalValues\": {\r\n            \"TX_VALUE\": {\r\n               \"value\": 65000,\r\n               \"currency\": \"COP\"\r\n         },\r\n            \"TX_TAX\": {\r\n               \"value\": 10378,\r\n               \"currency\": \"COP\"\r\n         },\r\n            \"TX_TAX_RETURN_BASE\": {\r\n               \"value\": 54622,\r\n               \"currency\": \"COP\"\r\n         }\r\n         },\r\n         \"buyer\": {\r\n            \"merchantBuyerId\": \"1\",\r\n            \"fullName\": \"First name and second buyer name\",\r\n            \"emailAddress\": \"buyer_test@test.com\",\r\n            \"contactPhone\": \"7563126\",\r\n            \"dniNumber\": \"123456789\",\r\n            \"shippingAddress\": {\r\n               \"street1\": \"Cr 23 No. 53-50\",\r\n               \"street2\": \"5555487\",\r\n               \"city\": \"Bogotá\",\r\n               \"state\": \"Bogotá D.C.\",\r\n               \"country\": \"CO\",\r\n               \"postalCode\": \"000000\",\r\n               \"phone\": \"7563126\"\r\n            }\r\n         },\r\n         \"shippingAddress\": {\r\n            \"street1\": \"Cr 23 No. 53-50\",\r\n            \"street2\": \"5555487\",\r\n            \"city\": \"Bogotá\",\r\n            \"state\": \"Bogotá D.C.\",\r\n            \"country\": \"CO\",\r\n            \"postalCode\": \"0000000\",\r\n            \"phone\": \"7563126\"\r\n         }\r\n      },\r\n      \"payer\": {\r\n         \"merchantPayerId\": \"1\",\r\n         \"fullName\": \"First name and second payer name\",\r\n         \"emailAddress\": \"payer_test@test.com\",\r\n         \"contactPhone\": \"7563126\",\r\n         \"dniNumber\": \"5415668464654\",\r\n         \"billingAddress\": {\r\n            \"street1\": \"Cr 23 No. 53-50\",\r\n            \"street2\": \"125544\",\r\n            \"city\": \"Bogotá\",\r\n            \"state\": \"Bogotá D.C.\",\r\n            \"country\": \"CO\",\r\n            \"postalCode\": \"000000\",\r\n            \"phone\": \"7563126\"\r\n         }\r\n      },\r\n      \"creditCard\": {\r\n         \"number\": \"4037997623271984\",\r\n         \"securityCode\": \"321\",\r\n         \"expirationDate\": \"2030/12\",\r\n         \"name\": \"APPROVED\"\r\n      },\r\n      \"extraParameters\": {\r\n         \"INSTALLMENTS_NUMBER\": 1\r\n      },\r\n      \"type\": \"AUTHORIZATION_AND_CAPTURE\",\r\n      \"paymentMethod\": \"VISA\",\r\n      \"paymentCountry\": \"CO\",\r\n      \"deviceSessionId\": \"vghs6tvkcle931686k1900o6e1\",\r\n      \"ipAddress\": \"127.0.0.1\",\r\n      \"cookie\": \"pt1t38347bs6jc9ruv2ecpv7o2\",\r\n      \"userAgent\": \"Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0\",\r\n      \"threeDomainSecure\": {\r\n         \"embedded\": false,\r\n         \"eci\": \"01\",\r\n         \"cavv\": \"AOvG5rV058/iAAWhssPUAAADFA==\",\r\n         \"xid\": \"Nmp3VFdWMlEwZ05pWGN3SGo4TDA=\",\r\n         \"directoryServerTransactionId\": \"00000-70000b-5cc9-0000-000000000cb\"\r\n      }\r\n   },\r\n   \"test\": true\r\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
