@@ -9,6 +9,7 @@ function setUniversalBeerPriceForBuyForm() {
     $('#flavor_selector select').change(e => {
         setUniversalBeerPrice($(e.target).parent().parent(), uprice);
         sumOrderTotal();
+
         
     });
     $('#flavor_selector .row').each((i, row) => {
@@ -37,5 +38,4 @@ function sumOrderTotal() {
 
 $(document).ready(function() {
     setUniversalBeerPriceForBuyForm();
-    sumOrderTotal();
 });

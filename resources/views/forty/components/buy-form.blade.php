@@ -15,13 +15,13 @@
                                 </div>
                                 <div class="col-6">
                                     <select name="details[{{$f->code}}][qty]" id="qty" class="qty fit">
-                                        <option value="0">None</option>
-                                        <option value="6">1 Sixpack</option>
-                                        <option value="12">2 Sixpacks</option>
-                                        <option value="18">3 Sixpacks</option>
-                                        <option value="20">1 Crate</option>
-                                        <option value="40">2 Crates</option>
-                                        <option value="80">3 Crates</option>
+                                        <option value="0:0">None</option>
+                                        <option value="6:48000">1 Sixpack</option>
+                                        <option value="12:96000">2 Sixpacks</option>
+                                        <option value="18:144000">3 Sixpacks</option>
+                                        <option value="20:160000">1 Crate</option>
+                                        <option value="40:320000">2 Crates</option>
+                                        <option value="80:640000">3 Crates</option>
                                     </select>
                                 </div>
                                 <div class="col-3">

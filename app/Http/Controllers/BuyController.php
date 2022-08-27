@@ -36,6 +36,11 @@ class BuyController extends Controller
             $flavor = $flavorsByCode[$type];
             $details[] = $this->toOrderDetail($detail, $flavor);
         }
+        $sum = 0;
+        foreach ($details as $detail) {
+            $sum += $detail->subtotal;
+        }
+        $order->total_price = $sum;
         $request->session()->put('order', $order);
         $request->session()->put('details', $details);
         $request->session()->put('flavors', $flavors);
@@ -83,9 +88,10 @@ class BuyController extends Controller
         $orderDetail = new OrderDetailEx();
         $orderDetail->order_id = null;
         $orderDetail->flavor_id = $flavor->id;
-        $orderDetail->qty = $detail['qty'];
-        $orderDetail->unit_price = $detail['subtotal']/$detail['qty'];
-        $orderDetail->subtotal = $detail['subtotal'];
+        $qty_price = explode(":",$detail['qty']);
+        $orderDetail->qty = 0+$qty_price[0];
+        $orderDetail->subtotal = 0+$qty_price[1];
+        $orderDetail->unit_price = $orderDetail->subtotal/$orderDetail->qty;
         return $orderDetail;
     }
 }
