@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Buy;
 use App\Models\Flavor;
 use App\Models\OrderEx;
 use App\Models\OrderDetailEx;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BuyController extends Controller
 {
@@ -49,9 +51,16 @@ class BuyController extends Controller
     }
 
     public function buy(Request $request) {
-        $summary = $request->session()->get('summary');
-        Mail::send(new Buy($summary));
-        $request->session()->forget('summary');
+        $order = $request->session()->get('order');
+        $details = $request->session()->get('details');
+        $flavors = $request->session()->get('flavors');
+
+        Mail::send(new Buy($order, $details, $flavors));
+        
+        $request->session()->forget('order');
+        $request->session()->forget('details');
+        $request->session()->forget('flavors');
+
         return redirect('/purchase-request-sent');
     }
 

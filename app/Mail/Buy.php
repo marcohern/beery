@@ -12,16 +12,20 @@ class Buy extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $buyRequest;
+    public $order;
+    public $details;
+    public $flavors;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($buyRequest)
+    public function __construct($order, $details, $flavors)
     {
-        $this->buyRequest = $buyRequest;
+        $this->order   = $order;
+        $this->details = $details;
+        $this->flavors = $flavors;
     }
 
     /**
@@ -33,7 +37,7 @@ class Buy extends Mailable
     {
         return $this->to(config('beery.emails.sales'),config('beery.title'))
             ->from(config('beery.emails.relay'))
-            ->replyTo($this->buyRequest->email)
+            ->replyTo($this->order->email)
             ->subject("Buy Request")
             ->view('forty.mail.html.buy')
             ->text('forty.mail.text.buy');

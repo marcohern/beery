@@ -1,7 +1,10 @@
-Buy Request by {{ $buyRequest->name }} <{{$buyRequest->email}}>:
+Buy Request by {{ $order->name }} <{{$order->email}}>:
 
-{{ ($buyRequest->flavor == 'surprise-me') ? 'Surprise Me':config("beery.flavors.$buyRequest->flavor") }} x{{ $buyRequest->qty }} for ${{$buyRequest->total}}
+@foreach ($details as $detail)
+    {{$flavors[$detail->flavor_id]->name}}....{{$detail->qty}}x{{$detail->unit_price}}: ${{$detail->subtotal}}
+@endforeach
+Total: {{$order->total_price}}
 
-{{ $buyRequest->comments }}
+{{ $order->comments }}
 
-My phone is {{ $buyRequest->phone }}.
+My phone is {{ $order->phone }}.
