@@ -6,15 +6,19 @@ use Illuminate\View\Component;
 
 class BuySummary extends Component
 {
-    public $summary;
+    public $order;
+    public $details;
+    public $flavors;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($summary)
+    public function __construct($order, $details, $flavors)
     {
-        $this->summary = $summary;
+        $this->order = $order;
+        $this->details = $details;
+        $this->flavors = $flavors;
     }
 
     /**

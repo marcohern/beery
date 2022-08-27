@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flavor;
-use App\Models\Order;
-use App\Models\OrderDetail;
+use App\Models\OrderEx;
+use App\Models\OrderDetailEx;
 use Illuminate\Http\Request;
 
 class BuyController extends Controller
@@ -16,23 +16,36 @@ class BuyController extends Controller
 
     public function buyform() {
         $flavors = Flavor::all();
-        return view('forty.pages.buy', ['flavors'=>$flavors]);
+        return view('forty.pages.buy', [ 'flavors'=>$flavors ]);
     }
 
     public function buySummarySave(Request $request) {
         $summary = (object)$request->all();
-        $summary->price = 8000;
-        $summary->total = $request->qty * $summary->price;
         $order = $this->toOrder($summary);
-        dd($order);
-        $request->session()->put('summary', $summary);
+        $flavorModels = Flavor::all();
+        $flavors = [];
+        $flavorsByCode = [];
+        foreach ($flavorModels as $flavor) {
+            $flavors[$flavor->id] = $flavor;
+            $flavorsByCode[$flavor->code] = $flavor;
+        }
+        $details = [];
+        foreach ($summary->details as $type => $detail) {
+            $flavor = $flavorsByCode[$type];
+            $details[] = $this->toOrderDetail($detail, $flavor);
+        }
+        $request->session()->put('order', $order);
+        $request->session()->put('details', $details);
+        $request->session()->put('flavors', $flavors);
         return redirect('/buy-summary');
     }
 
     public function buySummary(Request $request) {
-        if (!$request->session()->has('summary')) return redirect('/buy');
-        $summary = $request->session()->get('summary');
-        return view('forty.pages.buy-summary', ['summary'=> $summary]);
+        if (!$request->session()->has('order')) return redirect('/buy');
+        $order = $request->session()->get('order');
+        $details = $request->session()->get('details');
+        $flavors = $request->session()->get('flavors');
+        return view('forty.pages.buy-summary', [ 'order'=>$order, 'details'=>$details, 'flavors'=>$flavors ]);
     }
 
     public function buy(Request $request) {
@@ -42,28 +55,28 @@ class BuyController extends Controller
         return redirect('/purchase-request-sent');
     }
 
-    private function toOrder($input): Order
+    private function toOrder($input): OrderEx
     {
-        $order = new Order();
-        $order->user_id = 1;
+        $order = new OrderEx();
         $order->invoice = true;
         $order->effective_date = null;
         $order->total_price = $input->total;
-        $details = [];
-        foreach ($input->details as $type => $detail) {
-            $details[] = $this->toOrderDetail($type, $detail);
-        }
-        $order->details = $details;
+        
+        $order->name = $input->name;
+        $order->phone = $input->phone;
+        $order->email = $input->email;
+        $order->comments = $input->comments;
         return $order;
     }
 
-    private function toOrderDetail($type, $detail): OrderDetail
+    private function toOrderDetail($detail, &$flavor): OrderDetailEx
     {
-        $orderDetails = new OrderDetail();
-        $orderDetails->order_id = null;
-        $orderDetails->flavor_id = 1;
-        $orderDetails->qty = $detail['qty'];
-        $orderDetails->unit_price = $detail['subtotal']/$detail['qty'];
-        return $orderDetails;
+        $orderDetail = new OrderDetailEx();
+        $orderDetail->order_id = null;
+        $orderDetail->flavor_id = $flavor->id;
+        $orderDetail->qty = $detail['qty'];
+        $orderDetail->unit_price = $detail['subtotal']/$detail['qty'];
+        $orderDetail->subtotal = $detail['subtotal'];
+        return $orderDetail;
     }
 }

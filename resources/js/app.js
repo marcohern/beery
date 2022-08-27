@@ -37,4 +37,5 @@ function sumOrderTotal() {
 
 $(document).ready(function() {
     setUniversalBeerPriceForBuyForm();
+    sumOrderTotal();
 });

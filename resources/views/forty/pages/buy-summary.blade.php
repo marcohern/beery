@@ -10,7 +10,7 @@
                 </header>
                 <div class="row">
                     <div class="col-8 col-12-md">
-                        <x-buy-summary :summary="$summary"/>
+                        <x-buy-summary :order="$order" :details="$details" :flavors="$flavors"/>
                     </div>
                     <div class="col-4 col-12-md">
                         <form method="post" action="<?=url('/buy') ?>">

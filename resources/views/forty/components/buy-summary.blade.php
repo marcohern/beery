@@ -9,17 +9,19 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($details as $detail)
             <tr>
-                <td>{{ ($summary->flavor == 'surprise-me') ? 'Surprise Me' : config("beery.flavors.{$summary->flavor}") }}</td>
-                <td>{{$summary->qty}}</td>
-                <td>{{$summary->price}}</td>
-                <td>{{$summary->total}}</td>
+                <td>{{$flavors[$detail->flavor_id]->name}}</td>
+                <td>{{$detail->qty}}</td>
+                <td>{{$detail->unit_price}}</td>
+                <td>{{$detail->subtotal}}</td>
             </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="3"><b>Total</b></td>
-                <td><b>{{$summary->total}}</b></td>
+                <td><b>{{$order->total}}</b></td>
             </tr>
         </tfoot>
     </table>
