@@ -48,7 +48,7 @@ class OrderDetailExDal
         return [$flavors, $flavorsByCode];
     }
 
-    private function detailsToComment($details, $flavorsById) {
+    public function detailsToComment($details, $flavorsById) {
         $comments = 'Details:';
         foreach ($details as $detail) {
             $flavor = $flavorsById[$detail->flavor_id];

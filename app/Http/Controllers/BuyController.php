@@ -8,9 +8,11 @@ use App\DataAccess\OrderExDal;
 use App\DataAccess\OrderDetailExDal;
 use App\Services\PayuService;
 use App\Interpreters\OrderExInterpreter;
+use App\Interpreters\CreditCardInfoInterpreter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+
 
 class BuyController extends Controller
 {
@@ -22,11 +24,14 @@ class BuyController extends Controller
         OrderExDal $orderExDal,
         OrderDetailExDal $orderDetailExDal,
         OrderExInterpreter $orderExInterpreter,
+        CreditCardInfoInterpreter $creditCardInfoInterpreter,
         PayuService $payuService
     ) {
         $this->orderExDal = $orderExDal;
         $this->orderDetailExDal = $orderDetailExDal;
         $this->orderExInterpreter = $orderExInterpreter;
+        $this->creditCardInfoInterpreter = $creditCardInfoInterpreter;
+        $this->payuService = $payuService;
     }
 
     public function prsent()
@@ -85,21 +90,26 @@ class BuyController extends Controller
     public function buy(Request $request) {
         //Get order and details stored in session
         $session = $request->session();
-        $input = $request->all();
+        $input = (object)$request->all();
         $order = $session->get('order');
         $details = $session->get('details');
         $flavors = $session->get('flavors');
 
+        $flavorsById = [];
+        foreach($flavors as $flavor) {
+            $flavorsById[$flavor->id] = $flavor;
+        }
+
         //set it to become an invoice (freeze it)
         $this->orderExDal->makeEffective($order);
+
+        //Make the purchase
+        $this->payuService->purchase($order, $details, $flavorsById, $input);
 
         //save it all to the database
         DB::transaction(function() use ($order, $details) {
             $this->orderExDal->saveAll($order, $details);
         });
-
-        dd($order, $input);
-        $this->payuService->purchase($order, $input);
 
         //Send an email
         Mail::send(new Buy($order, $details, $flavors));

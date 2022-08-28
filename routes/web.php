@@ -29,5 +29,6 @@ Route::post('/buy-summary-save', [BuyController::class, 'buySummarySave']);
 Route::get('/purchase-request-sent', [BuyController::class, 'prsent']);
 Route::get('/buy-summary', [BuyController::class, 'buySummary']);
 Route::get('/buy', [BuyController::class, 'buyform']);
+Route::post('/buy-notify', [BuyController::class, 'notify']);
 
 Route::get('/', [NavController::class, 'home']);

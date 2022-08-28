@@ -12,7 +12,7 @@
                     </div>
                     <div class="field">
                         <label for="cc-number">Credit Card Number</label>
-                        <input type="text" id="cc-num" name="cc-num" autocomplete="cc-number" x-autocompletetype="cc-number" pattern="\d*" value="4037997623271984">
+                        <input type="text" id="cc-number" name="cc-number" autocomplete="cc-number" x-autocompletetype="cc-number" pattern="\d*" value="4037997623271984">
                     </div>
                     <div class="field half">
                         <label for="cc-exp">Expires</label>
