@@ -37,17 +37,17 @@ class OrderExDal
 
     public function toPayuOrder($order, $refCode, float $taxp=0.0)
     {
+        $txValue  = $order->total_price;
+        $txTax    = $taxp*$order->total_price;
+        $txReturn = (1-$taxp)*$order->total_price;
+
         $apiKey     = config('payu.apiKey');
         $merchantId = config('payu.merchantId');
         $accountId  = config('payu.accountId');
         $currency   = config('payu.currency');
-        $signature  = md5("$apiKey~$merchantId~$refCode~{$order->total_price}~$currency");
+        $signature  = md5("$apiKey~$merchantId~$refCode~$txValue~$currency");
         $comments = (empty($order->comments)) ? '':" {$order->comments}";
         $description = "Beery Purchase.$comments";
-
-        $txValue  = $order->total_price;
-        $txTax    = $taxp*$order->total_price;
-        $txReturn = (1-$taxp)*$order->total_price;
         return [
             'accountId'        => config('payu.accountId'),
             'referenceCode'    => '',
