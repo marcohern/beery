@@ -9,7 +9,7 @@ class OrderEx extends Model
 {
     use HasFactory;
 
-    protected $table = 'beery_orders_ex';
+    protected $table = 'orders_ex';
 
     public function details() {
         return $this->hasMany(OrderDetailEx::class);

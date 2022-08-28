@@ -9,8 +9,6 @@ class Flavor extends Model
 {
     use HasFactory;
 
-    protected $table = 'beery_flavors';
-
     public function orderDetails() {
         return $this->hasMany(OrderDetail::class);
     }

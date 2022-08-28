@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetailEx extends Model
 {
     use HasFactory;
-    protected $table = 'beery_order_details_ex';
+    protected $table = 'order_details_ex';
 
     public function order()
     {

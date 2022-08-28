@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('beery_orders', function (Blueprint $table) {
+        Schema::create('flavors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->boolean('invoice')->default(false);
-            $table->dateTime('effective_date')->nullable(true);
-            $table->decimal('total_price', 18, 4)->default(0.0);
+            $table->string('code',64);
+            $table->string('name',64);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beery_orders');
+        Schema::dropIfExists('flavors');
     }
 };

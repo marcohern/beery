@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('beery_orders_ex', function (Blueprint $table) {
+        Schema::create('orders_ex', function (Blueprint $table) {
             $table->id();
             $table->boolean('invoice')->default(false);
             $table->dateTime('effective_date')->nullable(true);
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beery_orders_ex');
+        Schema::dropIfExists('orders_ex');
     }
 };
