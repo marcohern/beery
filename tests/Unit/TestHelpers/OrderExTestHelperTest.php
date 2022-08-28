@@ -37,6 +37,7 @@ class ExampleTest extends TestCase
         $this->assertEquals($input->phone, '555 555 5555');
         $this->assertEquals($input->email, 'bpitt@mail.com');
         $this->assertEquals($input->comments, 'Lorem Ipsum dolor sit amet.');
+
         $this->assertEquals($input->address1, 'Cra 12 #34-56');
         $this->assertEquals($input->address2, 'Apt 123');
         $this->assertEquals($input->zone, 'Los Santos');
@@ -44,6 +45,7 @@ class ExampleTest extends TestCase
         $this->assertEquals($input->city, 'Medellin');
         $this->assertEquals($input->state, 'Antioquia');
         $this->assertEquals($input->country, 'Colombia');
+        
         $this->assertEquals($input->details, [
             'pale'  => ['qty'=>1, 'subtotal'=>'8000' ],
             'rusty' => ['qty'=>2, 'subtotal'=>'16000'],
