@@ -33,7 +33,7 @@ class OrderDetailsSeeder extends Seeder
         ];
         DateSeederHelper::setTimestamps($data);
         OrderDetailHelper::calculateSubtotals($data);
-        DB::table('beery_order_details')->insert($data);
+        DB::table('order_details')->insert($data);
         OrderHelper::updateTotalsFromDetails();
     }
 }

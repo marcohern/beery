@@ -23,6 +23,6 @@ class OrdersSeeder extends Seeder
         ];
 
         DateSeederHelper::setTimestamps($data);
-        DB::table('beery_orders')->insert($data);
+        DB::table('orders')->insert($data);
     }
 }

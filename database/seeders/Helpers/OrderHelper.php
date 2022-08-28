@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 class OrderHelper
 {
     public static function updateTotalsFromDetails() {
-        $orders = DB::table('beery_order_details')
+        $orders = DB::table('order_details')
             ->selectRaw('SUM(subtotal) AS price, order_id')
             ->groupBy('order_id')->get();
         foreach($orders as $order) {
-            DB::table('beery_orders')
+            DB::table('orders')
                 ->where('id', $order->order_id)
                 ->update(['total_price'=> $order->price]);
         }

@@ -24,6 +24,6 @@ class BeerySeeder extends Seeder
             ['id'=>3,'flavor_id'=>3, 'price'=>8000, 'stock'=>100 ],
         ];
         DateSeederHelper::setTimestamps($data);
-        DB::table('beery')->insert($data);
+        DB::table('stock')->insert($data);
     }
 }

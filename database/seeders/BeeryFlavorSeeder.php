@@ -22,6 +22,6 @@ class BeeryFlavorSeeder extends Seeder
             ['id'=>3,'code'=>'dark' , 'name'=>'Dark' ]
         ];
         DateSeederHelper::setTimestamps($data);
-        DB::table('beery_flavors')->insert($data);
+        DB::table('flavors')->insert($data);
     }
 }
