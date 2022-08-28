@@ -14,10 +14,7 @@
                         <x-buy-summary :order="$order" :details="$details" :flavors="$flavors"/>
                     </div>
                     <div class="col-4 col-12-md">
-                        <form method="post" action="<?=url('/buy') ?>">
-                            @csrf
-                            <button class="button primary fit">Request Purchase</button>
-                        </form>
+                        <x-credit-card-form/>
                     </div>
                 </div>
                 <span class="image main"><img src="templates/forty/images/pic11.jpg" alt="" /></span>

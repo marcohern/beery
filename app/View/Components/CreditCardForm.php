@@ -6,15 +6,14 @@ use Illuminate\View\Component;
 
 class CreditCardForm extends Component
 {
-    public $payment;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($payment)
+    public function __construct()
     {
-        $this->payment = $payment;
+        
     }
 
     /**
