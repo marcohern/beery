@@ -23,6 +23,7 @@ class OrderExDal
         $order->zone = $input->zone;
         $order->zip = $input->zip;
         $order->city = $input->city;
+        $order->state = $input->state;
         $order->country = $input->country;
 
         return $order;

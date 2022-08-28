@@ -37,7 +37,7 @@ class GeneratePayuSignatureCommand extends Command
         $signature  = md5("$apiKey~$merchantId~$refCode~$txValue~$currency");
 
         echo "apiKey    : $apiKey\n";
-        echo "merchantId: merchantId\n";
+        echo "merchantId: $merchantId\n";
         echo "accountId : $accountId\n";
         echo "txValue   : $txValue\n";
         echo "currency  : $currency\n";

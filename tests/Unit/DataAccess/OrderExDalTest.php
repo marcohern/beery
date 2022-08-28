@@ -29,6 +29,7 @@ class OrderExDalTests extends TestCase
         $input->zone = 'Los Santos';
         $input->zip = '050078';
         $input->city = 'Medellin';
+        $input->state = 'Antioquia';
         $input->country = 'Colombia';
 
         return $input;
@@ -59,6 +60,7 @@ class OrderExDalTests extends TestCase
         $this->assertEquals($order->zone, 'Los Santos');
         $this->assertEquals($order->zip, '050078');
         $this->assertEquals($order->city, 'Medellin');
+        $this->assertEquals($order->state, 'Antioquia');
         $this->assertEquals($order->country, 'Colombia');
     }
 

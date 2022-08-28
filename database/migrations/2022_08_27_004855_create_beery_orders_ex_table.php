@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('zone',255);
             $table->string('zip',32);
             $table->string('city',64);
+            $table->string('state',64);
             $table->string('country',64);
             $table->string('comments')->nullable();
             $table->timestamps();
