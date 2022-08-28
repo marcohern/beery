@@ -35,6 +35,34 @@ class OrderExDal
         $order->invoice = true;
     }
 
+    public function toPayuOrder($order, $refCode, float $taxp=0.0)
+    {
+        $apiKey     = config('payu.apiKey');
+        $merchantId = config('payu.merchantId');
+        $accountId  = config('payu.accountId');
+        $currency   = config('payu.currency');
+        $signature  = md5("$apiKey~$merchantId~$refCode~{$order->total_price}~$currency");
+        $comments = (empty($order->comments)) ? '':" {$order->comments}";
+        $description = "Beery Purchase.$comments";
+
+        $txValue  = $order->total_price;
+        $txTax    = $taxp*$order->total_price;
+        $txReturn = (1-$taxp)*$order->total_price;
+        return [
+            'accountId'        => config('payu.accountId'),
+            'referenceCode'    => '',
+            'description'      => $description,
+            'language'         => 'es',
+            'signature'        => $signature,
+            'notifyUrl'        => 'http://www.payu.com/notify',
+            'additionalValues' => [
+                'TX_VALUE'           => [ 'value' => $txValue , 'currency' => $currency ],
+                'TX_TAX'             => [ 'value' => $txTax   , 'currency' => $currency ],
+                'TX_TAX_RETURN_BASE' => [ 'value' => $txReturn, 'currency' => $currency ]
+            ]
+        ];
+    }
+
     public function saveAll(OrderEx $order, array $details)
     {
         $order->save();
