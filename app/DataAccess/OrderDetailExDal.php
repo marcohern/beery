@@ -47,4 +47,13 @@ class OrderDetailExDal
         }
         return [$flavors, $flavorsByCode];
     }
+
+    private function detailsToComment($details, $flavorsById) {
+        $comments = 'Details:';
+        foreach ($details as $detail) {
+            $flavor = $flavorsById[$detail->flavor_id];
+            $comments .= " + {$flavor->name}x{$detail->qty}={$detail->subtotal}";
+        }
+        return $comments;
+    }
 }

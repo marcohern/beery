@@ -2,10 +2,17 @@
 
 namespace App\DataAccess;
 
+use App\DataAccess\OrderDetailExDal;
 use App\Models\OrderEx;
 
 class OrderExDal
 {
+    private $detailDal;
+
+    public function __construct(OrderDetailExDal $detailDal) {
+        $this->detailDal = $detailDal;
+    }
+
     public function fromForm($input): OrderEx
     {
         $order = new OrderEx();
@@ -35,7 +42,7 @@ class OrderExDal
         $order->invoice = true;
     }
 
-    public function toPayuOrder($order, $refCode, float $taxp=0.0)
+    public function toPayuOrder($order, $refCode, $details, $flavorsById, float $taxp=0.0)
     {
         $txValue  = $order->total_price;
         $txTax    = $taxp*$order->total_price;
@@ -46,13 +53,15 @@ class OrderExDal
         $accountId  = config('payu.accountId');
         $currency   = config('payu.currency');
         $signature  = md5("$apiKey~$merchantId~$refCode~$txValue~$currency");
+
         $comments = (empty($order->comments)) ? '':" {$order->comments}";
-        $description = "Beery Purchase.$comments";
+        $detailsComment = $this->detailDal->detailsToComment($details, $flavorsById);
+        $description = "Beery Purchase. $detailsComment.$comments";
         return [
             'accountId'        => config('payu.accountId'),
             'referenceCode'    => '',
             'description'      => $description,
-            'language'         => 'es',
+            'language'         => config('payu.language'),
             'signature'        => $signature,
             'notifyUrl'        => 'http://www.payu.com/notify',
             'additionalValues' => [
