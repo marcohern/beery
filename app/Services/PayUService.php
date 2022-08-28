@@ -7,4 +7,9 @@ class PayUService {
     {
 
     }
+
+    public function purchase($order, $input)
+    {
+        
+    }
 }

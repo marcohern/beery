@@ -8,11 +8,11 @@
                     
                     <div class="field">
                         <label for="cc-name">Credit Card Name</label>
-                        <input type="text" id="cc-name" autocomplete="cc-name" x-autocompletetype="cc-name" value="APPROVED">
+                        <input type="text" id="cc-name" name="cc-name" autocomplete="cc-name" x-autocompletetype="cc-name" value="APPROVED">
                     </div>
                     <div class="field">
                         <label for="cc-number">Credit Card Number</label>
-                        <input type="text" id="cc-num" autocomplete="cc-number" x-autocompletetype="cc-number" pattern="\d*" value="4037997623271984">
+                        <input type="text" id="cc-num" name="cc-num" autocomplete="cc-number" x-autocompletetype="cc-number" pattern="\d*" value="4037997623271984">
                     </div>
                     <div class="field half">
                         <label for="cc-exp">Expires</label>

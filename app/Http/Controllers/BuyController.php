@@ -6,6 +6,7 @@ use App\Mail\Buy;
 use App\Models\Flavor;
 use App\DataAccess\OrderExDal;
 use App\DataAccess\OrderDetailExDal;
+use App\Services\PayuService;
 use App\Interpreters\OrderExInterpreter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +18,12 @@ class BuyController extends Controller
     protected $orderDetailExDal;
     protected $orderExInterpreter;
 
-    public function __construct(OrderExDal $orderExDal, OrderDetailExDal $orderDetailExDal, OrderExInterpreter $orderExInterpreter)
-    {
+    public function __construct(
+        OrderExDal $orderExDal,
+        OrderDetailExDal $orderDetailExDal,
+        OrderExInterpreter $orderExInterpreter,
+        PayuService $payuService
+    ) {
         $this->orderExDal = $orderExDal;
         $this->orderDetailExDal = $orderDetailExDal;
         $this->orderExInterpreter = $orderExInterpreter;
@@ -80,6 +85,7 @@ class BuyController extends Controller
     public function buy(Request $request) {
         //Get order and details stored in session
         $session = $request->session();
+        $input = $request->all();
         $order = $session->get('order');
         $details = $session->get('details');
         $flavors = $session->get('flavors');
@@ -92,6 +98,9 @@ class BuyController extends Controller
             $this->orderExDal->saveAll($order, $details);
         });
 
+        dd($order, $input);
+        $this->payuService->purchase($order, $input);
+
         //Send an email
         Mail::send(new Buy($order, $details, $flavors));
         
@@ -100,5 +109,10 @@ class BuyController extends Controller
 
         //Rederect to a confirm purchase
         return redirect('/purchase-request-sent');
+    }
+
+    public function notify(Request $request)
+    {
+        $input = $request->all();
     }
 }
