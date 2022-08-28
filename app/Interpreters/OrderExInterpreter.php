@@ -1,20 +1,32 @@
 <?php 
 
-namespace App\DataAccess;
+namespace App\Interpreters;
 
+use App\Models\OrderEx;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderExInterpreter implements IInterpreter
 {
-    public function fromForm(Collection $input): Model
+    public function fromForm($input): Model
     {
-        $orderDetail = new OrderDetailEx();
-        $orderDetail->order_id = null;
-        $orderDetail->flavor_id = $flavor->id;
-        $qty_price = explode(":",$detail['qty']);
-        $orderDetail->qty = 0+$qty_price[0];
-        $orderDetail->subtotal = 0+$qty_price[1];
-        $orderDetail->unit_price = $orderDetail->subtotal/$orderDetail->qty;
-        return $orderDetail;
+        $order = new OrderEx();
+        $order->invoice = false;
+        $order->effective_date = null;
+        $order->total_price = $input->total;
+
+        $order->name = $input->name;
+        $order->phone = $input->phone;
+        $order->email = $input->email;
+        $order->comments = $input->comments;
+
+        $order->address1 = $input->address1;
+        $order->address2 = $input->address2;
+        $order->zone = $input->zone;
+        $order->zip = $input->zip;
+        $order->city = $input->city;
+        $order->state = $input->state;
+        $order->country = $input->country;
+
+        return $order;
     }
 }

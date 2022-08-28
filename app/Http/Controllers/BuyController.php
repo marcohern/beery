@@ -6,6 +6,7 @@ use App\Mail\Buy;
 use App\Models\Flavor;
 use App\DataAccess\OrderExDal;
 use App\DataAccess\OrderDetailExDal;
+use App\Interpreters\OrderExInterpreter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -14,11 +15,13 @@ class BuyController extends Controller
 {
     protected $orderExDal;
     protected $orderDetailExDal;
+    protected $orderExInterpreter;
 
-    public function __construct(OrderExDal $orderExDal, OrderDetailExDal $orderDetailExDal)
+    public function __construct(OrderExDal $orderExDal, OrderDetailExDal $orderDetailExDal, OrderExInterpreter $orderExInterpreter)
     {
         $this->orderExDal = $orderExDal;
         $this->orderDetailExDal = $orderDetailExDal;
+        $this->orderExInterpreter = $orderExInterpreter;
     }
 
     public function prsent()
@@ -37,12 +40,12 @@ class BuyController extends Controller
         //get catalog of flavors and the form data
         $flavors = Flavor::all();
         $summary = (object)$request->all();
-
+        
         //create flavor hash tables by id and code
         list($flavorsById, $flavorsByCode) = $this->orderDetailExDal->getFlavorHashTables($flavors);
 
         //Use the form data to create models (order and details)
-        $order = $this->orderExDal->fromForm($summary);
+        $order = $this->orderExInterpreter->fromForm($summary);
         $details = $this->orderDetailExDal->listFromForm($flavorsByCode, $summary->details);
         $order->total_price = $this->orderDetailExDal->sumTotal($details);
         

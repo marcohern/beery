@@ -25,8 +25,8 @@ class OrderExDal
         $order->email = $input->email;
         $order->comments = $input->comments;
 
-        $order->suite = $input->suite;
-        $order->address = $input->address;
+        $order->address1 = $input->address1;
+        $order->address2 = $input->address2;
         $order->zone = $input->zone;
         $order->zip = $input->zip;
         $order->city = $input->city;

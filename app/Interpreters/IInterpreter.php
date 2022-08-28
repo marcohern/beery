@@ -1,10 +1,10 @@
 <?php 
 
-namespace App\DataAccess;
+namespace App\Interpreters;
 
 use Illuminate\Database\Eloquent\Model;
 
 interface IInterpreter
 {
-    public function fromForm(Collection $input): Model;
+    public function fromForm($input): Model;
 }
