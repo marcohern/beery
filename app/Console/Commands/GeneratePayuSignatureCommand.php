@@ -30,13 +30,15 @@ class GeneratePayuSignatureCommand extends Command
         $rand = rand();
         $apiKey     = config('payu.apiKey');
         $merchantId = config('payu.merchantId');
+        $accountId  = config('payu.accountId');
         $txValue    = $this->argument('txValue');
         $currency   = config('payu.currency');
-        $refCode    = $this->argument('refCode')."_$rand";
+        $refCode    = $this->argument('refCode').$rand;
         $signature  = md5("$apiKey~$merchantId~$refCode~$txValue~$currency");
 
         echo "apiKey    : $apiKey\n";
         echo "merchantId: merchantId\n";
+        echo "accountId : $accountId\n";
         echo "txValue   : $txValue\n";
         echo "currency  : $currency\n";
         echo "refCode   : $refCode\n";
