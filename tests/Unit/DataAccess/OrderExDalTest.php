@@ -3,6 +3,7 @@
 namespace Tests\Unit\DataAccess;
 
 use App\DataAccess\OrderExDal;
+use App\DataAccess\OrderDetailExDal;
 use PHPUnit\Framework\TestCase;
 
 class OrderExDalTests extends TestCase
@@ -44,7 +45,8 @@ class OrderExDalTests extends TestCase
     {
         $input = $this->buildOrderFormData();
 
-        $dal = new OrderExDal();
+        $detDal = new OrderDetailExDal();
+        $dal = new OrderExDal($detDal);
         $order = $dal->fromForm($input);
 
         $this->assertEquals($order->total, $order->total);
@@ -68,7 +70,8 @@ class OrderExDalTests extends TestCase
     {
         $input = $this->buildOrderFormData();
 
-        $dal = new OrderExDal();
+        $detDal = new OrderDetailExDal();
+        $dal = new OrderExDal($detDal);
         $order = $dal->fromForm($input);
         
         $dal->makeEffective($order);
