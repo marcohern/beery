@@ -34,7 +34,9 @@ class GeneratePayuSignatureCommand extends Command
         $txValue    = $this->argument('txValue');
         $currency   = config('payu.currency');
         $refCode    = $this->argument('refCode').$rand;
-        $signature  = md5("$apiKey~$merchantId~$refCode~$txValue~$currency");
+        $secret     = "$apiKey~$merchantId~$refCode~$txValue~$currency";
+        $signature  = md5($secret);
+        $sha        = sha1($secret);
 
         echo "apiKey    : $apiKey\n";
         echo "merchantId: $merchantId\n";
@@ -42,7 +44,8 @@ class GeneratePayuSignatureCommand extends Command
         echo "txValue   : $txValue\n";
         echo "currency  : $currency\n";
         echo "refCode   : $refCode\n";
-        echo "signature : $signature\n";
+        echo "signature (md5)  : $signature\n";
+        echo "signature (sha1) : $sha\n";
         return 0;
     }
 }
