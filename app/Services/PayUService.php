@@ -33,6 +33,7 @@ class PayUService {
         $comments = (empty($order->comments)) ? '':" {$order->comments}";
         $detailsComment = $this->detailDal->detailsToComment($details, $flavorsById);
         $description = "Beery Purchase. $detailsComment.$comments";
+
         return [
             'accountId'        => config('payu.accountId'),
             'referenceCode'    => $refCode,
@@ -42,8 +43,8 @@ class PayUService {
             'notifyUrl'        => 'http://www.payu.com/notify',
             'additionalValues' => [
                 'TX_VALUE'           => [ 'value' => $txValue , 'currency' => $currency ],
-                'TX_TAX'             => [ 'value' => 0, 'currency' => $currency ],
-                'TX_TAX_RETURN_BASE' => [ 'value' => 0, 'currency' => $currency ]
+                'TX_TAX'             => [ 'value' => $txTax   , 'currency' => $currency ],
+                'TX_TAX_RETURN_BASE' => [ 'value' => $txReturn, 'currency' => $currency ]
             ],
             'buyer' => $this->toBuyer($order),
             'shippingAddress' => $this->toAddress($order),
@@ -112,6 +113,9 @@ class PayUService {
 
     public function toTransaction($order, $details, $flavorsById, $input, float $taxp=0.0)
     {
+        $sessionId = md5(session()->getId().microtime());
+        $cookie = md5('cookieid_'.microtime());
+        $ip = request()->ip();
         return [
             'order' => $this->toOrder($order, $details, $flavorsById, $taxp),
             'payer' => $this->toPayer($order),
@@ -119,10 +123,10 @@ class PayUService {
             'extraParameters' => [ 'INSTALLMENTS_NUMBER' => 1 ],
             'type' => 'AUTHORIZATION_AND_CAPTURE',
             'paymentMethod' => $input->{'cc-method'},
-            'paymentCountry' => 'CO',
-            'deviceSessionId' => 'vghs6tvkcle931686k1900o6e1',
-            'ipAddress' => '127.0.0.1',
-            'cookie' => 'pt1t38347bs6jc9ruv2ecpv7o2',
+            'paymentCountry' => $order->country,
+            'deviceSessionId' => $sessionId,
+            'ipAddress' => $ip,
+            'cookie' => $cookie,
             'userAgent' => 'Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0',
             'threeDomainSecure' => $this->to3ds2()
         ];
