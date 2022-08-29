@@ -164,6 +164,6 @@ class PayUService {
             ])
             ->post($url);
         $json = $response->json();
-        dd($inJson, $json, $response);
+        //dd($inJson, $json, $response);
     }
 }
