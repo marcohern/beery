@@ -84,7 +84,7 @@
                     </div>
                     <div class="field quarter">
                         <label for="country">Country</label>
-                        <input type="text" name="country" id="country"  value="Colombia" required />
+                        <input type="text" name="country" id="country"  value="CO" required />
                     </div>
 
                     <div class="field">

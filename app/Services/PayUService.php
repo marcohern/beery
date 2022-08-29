@@ -26,7 +26,9 @@ class PayUService {
         $accountId  = config('payu.accountId');
         $currency   = config('payu.currency');
         $refCode    = config('payu.refCode').$rand;
-        $signature  = md5("$apiKey~$merchantId~$refCode~$txValue~$currency");
+        $sigsource  = "$apiKey~$merchantId~$refCode~$txValue~$currency";
+        $signature  = md5($sigsource);
+        //dd($sigsource, $signature);
 
         $comments = (empty($order->comments)) ? '':" {$order->comments}";
         $detailsComment = $this->detailDal->detailsToComment($details, $flavorsById);
@@ -40,8 +42,8 @@ class PayUService {
             'notifyUrl'        => 'http://www.payu.com/notify',
             'additionalValues' => [
                 'TX_VALUE'           => [ 'value' => $txValue , 'currency' => $currency ],
-                'TX_TAX'             => [ 'value' => $txTax   , 'currency' => $currency ],
-                'TX_TAX_RETURN_BASE' => [ 'value' => $txReturn, 'currency' => $currency ]
+                'TX_TAX'             => [ 'value' => 0, 'currency' => $currency ],
+                'TX_TAX_RETURN_BASE' => [ 'value' => 0, 'currency' => $currency ]
             ],
             'buyer' => $this->toBuyer($order),
             'shippingAddress' => $this->toAddress($order),
@@ -63,7 +65,7 @@ class PayUService {
     public function toPayer($order)
     {
         return [
-            'merchantBuyerId' => '1',
+            'merchantPayerId' => '1',
             'fullName' => $order->name,
             'emailAddress' => $order->email,
             'contactPhone' => $order->phone,
@@ -116,9 +118,9 @@ class PayUService {
             'creditCard' => $this->toCreditCard($input),
             'extraParameters' => [ 'INSTALLMENTS_NUMBER' => 1 ],
             'type' => 'AUTHORIZATION_AND_CAPTURE',
-            'paymentMethod' => 'VISA',
+            'paymentMethod' => $input->{'cc-method'},
             'paymentCountry' => 'CO',
-            'deviceSessionId' => '123456',
+            'deviceSessionId' => 'vghs6tvkcle931686k1900o6e1',
             'ipAddress' => '127.0.0.1',
             'cookie' => 'pt1t38347bs6jc9ruv2ecpv7o2',
             'userAgent' => 'Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0',
@@ -134,8 +136,8 @@ class PayUService {
             'language' => 'es',
             'command' => 'SUBMIT_TRANSACTION',
             'merchant' => [
-                'apiLogin'=> $apiKey,
-                'apiKey'=> $apiLogin
+                'apiLogin'=> $apiLogin,
+                'apiKey'=> $apiKey
             ],
             'transaction' => $this->toTransaction($order, $details, $flavorsById, $input, 0.0),
             'test' => true
@@ -151,7 +153,13 @@ class PayUService {
     {
         $url = config('payu.url');
         $body = $this->toRequest($order, $details, $flavorsById, $input);
-        $response = Http::withBody(json_encode($body), 'application/json')->post($url);
-        dd($response);
+        $inJson =json_encode($body);
+        $response = Http::withBody($inJson, 'application/json')
+            ->withHeaders([
+                'Accept' => 'application/json'
+            ])
+            ->post($url);
+        $json = $response->json();
+        dd($inJson, $json, $response);
     }
 }

@@ -11,7 +11,7 @@ class GeneratePayuSignatureCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'payu:gen {txValue} {refCode}';
+    protected $signature = 'payu:gen {txValue} {refCode} {--norand}';
 
     /**
      * The console command description.
@@ -33,8 +33,13 @@ class GeneratePayuSignatureCommand extends Command
         $accountId  = config('payu.accountId');
         $txValue    = $this->argument('txValue');
         $currency   = config('payu.currency');
+
         $refCode    = $this->argument('refCode').$rand;
+        $refCode = ($this->option('norand'))
+            ? $this->argument('refCode')
+            : $this->argument('refCode').$rand;
         $secret     = "$apiKey~$merchantId~$refCode~$txValue~$currency";
+        
         $signature  = md5($secret);
         $sha        = sha1($secret);
 
@@ -44,6 +49,7 @@ class GeneratePayuSignatureCommand extends Command
         echo "txValue   : $txValue\n";
         echo "currency  : $currency\n";
         echo "refCode   : $refCode\n";
+        echo "secret    : $secret\n";
         echo "signature (md5)  : $signature\n";
         echo "signature (sha1) : $sha\n";
         return 0;
