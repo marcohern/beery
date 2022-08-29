@@ -40,7 +40,7 @@ class PayUService {
             'description'      => $description,
             'language'         => config('payu.language'),
             'signature'        => $signature,
-            'notifyUrl'        => 'http://www.payu.com/notify',
+            'notifyUrl'        => config('payu.notifyUrl'),
             'additionalValues' => [
                 'TX_VALUE'           => [ 'value' => $txValue , 'currency' => $currency ],
                 'TX_TAX'             => [ 'value' => $txTax   , 'currency' => $currency ],
