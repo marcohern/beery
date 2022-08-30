@@ -71,6 +71,14 @@ class BuyController extends Controller
 
     public function buySummary(Request $request) {
         $session = $request->session();
+
+        //check for transaction errors
+        $error = null;
+        if ($session->has('error')) {
+            $error = $session->get('error');
+            $session->forget('error');
+        }
+
         //check if there is an order to display
         if (!$session->has('order')) return redirect('/buy');
 
@@ -83,7 +91,8 @@ class BuyController extends Controller
         return view('forty.pages.buy-summary', [
             'order'=>$order,
             'details'=>$details,
-            'flavors'=>$flavors
+            'flavors'=>$flavors,
+            'error'=>$error
         ]);
     }
 
@@ -104,7 +113,27 @@ class BuyController extends Controller
         $this->orderExDal->makeEffective($order);
 
         //Make the purchase
-        $this->payuService->purchase($order, $details, $flavorsById, $input);
+        $payu = (object)$this->payuService->purchase($order, $details, $flavorsById, $input);
+        if (isset($payu->transactionResponse)) {
+            if ($payu->transactionResponse['state'] != 'APPROVED') {
+                
+                $session->put('error'   , (object)[
+                    'state'        => $payu->transactionResponse['state'],
+                    'responseCode' => $payu->transactionResponse['responseCode'],
+                    'message'      => $payu->transactionResponse['paymentNetworkResponseErrorMessage'],
+                    'response'     => $payu
+                ]);
+                return redirect('/buy-summary');
+            }
+        } else {
+            $session->put('error'   , (object)[
+                'state'        => 'NORESPONSE',
+                'responseCode' => 'NORESPONSE',
+                'message'      => 'No response received',
+                'response'     => $payu
+            ]);
+            return redirect('/buy-summary');
+        }
 
         //save it all to the database
         DB::transaction(function() use ($order, $details) {

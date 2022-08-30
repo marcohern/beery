@@ -14,11 +14,11 @@ class PayUService {
         $this->detailDal = $detailDal;
     }
 
-    public function toOrder($order, $details, $flavorsById, float $taxp=0.0)
+    public function toOrder($order, $details, $flavorsById, float $taxp=0)
     {
         $txValue  = $order->total_price;
         $txTax    = $taxp*$order->total_price;
-        $txReturn = (1-$taxp)*$order->total_price;
+        $txReturn = ($taxp==0) ? 0 : (1-$taxp)*$order->total_price;
         $rand     = rand();
 
         $apiKey     = config('payu.apiKey');
@@ -164,6 +164,7 @@ class PayUService {
             ])
             ->post($url);
         $json = $response->json();
+        return $json;
         //dd($inJson, $json, $response);
     }
 }

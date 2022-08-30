@@ -8,6 +8,10 @@
                 <header class="major">
                     <h1>Buy Summary</h1>
                 </header>
+                @if ($error)
+                    <div style="color:red">{{$error->state}} {{$error->responseCode}}: {{$error->message}}</div>
+                    <!--{{json_encode($error->response)}}-->
+                @endif
                 <div class="row">
                     <div class="col-8 col-12-md">
                         <x-buy-header :order="$order"/>
